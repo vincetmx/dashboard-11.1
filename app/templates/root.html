@@ -1,0 +1,33 @@
+<div class="contain-fluid"> 
+<div id="secondDiv">
+<div id="titleDiv">
+    <div id="logoimg"><img src="assets/images/src/app/logo.png"></div>
+    <button id="logoutButton">Log Out</button>
+</div>
+
+     <!-- Sidebar -->
+<div id="sidebar-wrapper" class="col-md-2">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+        </li>
+        <li>
+            <div class="iconDiv"><span class="icon glyphicon glyphicon-cloud"></span><a class="sidebar" href="#/overview" ui-sref=".overview">Overview</a></div>
+        </li>
+        <li>
+            <div class="iconDiv"><span class="icon glyphicon glyphicon-tags"></span><a class="sidebar" href="#/work" ui-sref=".work">Work</a></div>
+        </li>
+        <li>
+            <div class="iconDiv"><span class="icon glyphicon glyphicon-tint"></span><a class="sidebar" href="#/producer" ui-sref=".producer">Producer</a></div>
+        </li>
+        <li>
+            <div class="iconDiv"><span class="icon glyphicon glyphicon-th-large"></span><a class="sidebar" href="#/contact" ui-sref=".contact">Contact</a></div>
+        </li>
+    </ul>
+</div>
+
+<div id="displayDiv" class="col-md-10" >
+    <div ui-view></div>
+</div>
+</div>
+
+</div>
