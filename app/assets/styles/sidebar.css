@@ -1,0 +1,30 @@
+
+#sidebar-wrapper ul li{
+	list-style-type: none;
+	margin:15px;
+	font-size: 22px;
+}
+#sidebar-wrapper ul li a{
+	text-decoration: none;
+	color:black;
+}
+.iconDiv:hover{
+	color:white;
+	background-color: red;
+}
+.iconDiv:active{
+	color:red;
+	border-left: 4px solid red;
+}
+#sidebar-wrapper ul li a:hover{
+	color:white;
+}
+#sidebar-wrapper ul li a:active{
+	color:red;
+}
+.sidebar{
+	margin-left: 10px;
+}
+.iconDiv{
+	padding: 5px 5px 5px 10px;
+}

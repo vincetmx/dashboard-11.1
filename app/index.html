@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="assets/styles/login.css">
+    <link rel="stylesheet" type="text/css" href="assets/styles/main.css">
+    <link rel="stylesheet" type="text/css" href="assets/styles/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="assets/styles/work.css">
+    <!--    Here are JQuery, Bootstrap and AngularJS     -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.js"></script> -->
+    <script type="text/javascript" src="http://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+    <!--    Make sure the application is always loaded firstly   -->
+    <script type="text/javascript" src="scripts/app.js"></script>
+    <!--    This part is to load the controllers     -->
+    <script type="text/javascript" src="scripts/controllers/login.js"></script>
+    <script type="text/javascript" src="scripts/controllers/root.js"></script>
+    <script type="text/javascript" src="scripts/controllers/work.js"></script>
+    <!--    This part is to load the services    -->
+    <script type="text/javascript" src="scripts/services/authenticate.js"></script>
+    <script type="text/javascript" src="scripts/services/getUser.js"></script>
+    <script type="text/javascript" src="scripts/services/session.js"></script>
+	<title>Dashboard</title>
+</head>
+<body>
+    <div id="content" ui-view></div>
+</body>
+</html>

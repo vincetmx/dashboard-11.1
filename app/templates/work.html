@@ -1,0 +1,45 @@
+<div id="work">
+	 <div id="filterDiv" class="container-fluid">
+    <div class="btn-group">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select design
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="#listView">List</a></li>
+      <li><a href="#cardView">Card</a></li>
+    </ul>
+    <button class="btn btn-danger">Add Item</button>
+    <input id="firstFilter" class="filterinput" type="text" name="name" placeholder="Name">
+    <input class="filterinput" type="text" name="author" placeholder="Author">
+    <input class="filterinput" type="text" name="like" placeholder="Like">
+    <input class="filterinput" type="text" name="comment" placeholder="Comment"> 
+    </div>
+    </div>
+    <div id="worksDiv" class="container-fluid" ng-controller="workCtrl">
+    	<div id="cardView" ui-view>
+    		<ul class="row">
+    			 <li class="col-md-4" ng-repeat="x in works">
+    			    <div><img src="{{x.image}}" style="width:100%" /></div>
+    				<div id="title"><b>{{x.title}}</b></div>
+    				<div id="author">{{x.author}}</div>
+    				<div id="like">{{x.like}}</div>
+    				<div id="comment">{{x.comment}}</div>
+    				<div id="foot"><a href="#">Edit</a>|<a href="#">Delete</a></div>
+    			</li>
+    		</ul>
+    	</div>
+
+    	<div id="listView" ui-view>
+    		<table>
+    		    <tr class="col-md-12" ng-repeat="x in works">
+    			    <td><b>{{x.title}}</b></td>
+    				<td>{{x.author}}</td>
+    				<td>{{x.like}}</td>
+    				<td>{{x.comment}}</td>
+    				<td><a href="#">Edit</a></td>
+    				<td><a href="#">Delete</a></td>
+    			</td>
+    			</tr>
+    		</table>
+    	</div>
+    </div>
+</div>
