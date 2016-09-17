@@ -1,45 +1,54 @@
-<div id="work">
+<div id="work" ng-controller="workCtrl">
 	 <div id="filterDiv" class="container-fluid">
-    <div class="btn-group">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select design
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu" role="menu">
-      <li><a href="#listView">List</a></li>
-      <li><a href="#cardView">Card</a></li>
-    </ul>
-    <!-- 辞海 -->
-    <div add-directive></div>
-    <!-- 辞海 -->
-    <input id="firstFilter" class="filterinput" type="text" name="name" placeholder="Name">
-    <input class="filterinput" type="text" name="author" placeholder="Author">
-    <input class="filterinput" type="text" name="like" placeholder="Like">
-    <input class="filterinput" type="text" name="comment" placeholder="Comment"> 
+        <div class="btn-group">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select design
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu" role="menu">
+                <li ng-click="toggle(true)">List</li>
+                <li ng-click="toggle(false)">Card</li>
+            </ul>
+            <button class="btn btn-danger" data-target="#myModalAdd" data-toggle="modal">Add Item</button>
+            <add-dialog></add-dialog>
+            <input id="firstFilter" class="filterinput" type="text" name="name" placeholder="Name" ng-model="filtername">
+            <input class="filterinput" type="text" name="author" placeholder="Author" ng-model="filterauthor">
+            <input class="filterinput" type="text" name="like" placeholder="Like" ng-model="filterlike">
+            <input class="filterinput" type="text" name="comment" placeholder="Comment" ng-model="filtercomment"> 
+        </div>
     </div>
-    </div>
-    <div id="worksDiv" class="container-fluid" ng-controller="workCtrl">
-    	<div id="cardView" ui-view>
+    <div id="worksDiv" class="container-fluid">
+    	<div id="cardView" ng-show="myVar1">
     		<ul class="row">
-    			 <li class="col-md-4" ng-repeat="x in works">
+    			 <li class="col-md-4" ng-repeat="x in works|filter:filtername|filter:filterauthor|filter:filterlike|filter:filtercomment">
     			    <div><img src="{{x.image}}" style="width:100%" /></div>
     				<div id="title"><b>{{x.title}}</b></div>
     				<div id="author">{{x.author}}</div>
     				<div id="like">{{x.like}}</div>
     				<div id="comment">{{x.comment}}</div>
-    				<div id="foot"><a href="#">Edit</a>|<a href="#">Delete</a></div>
+    				<div id="foot"><a class="edlink" data-target="#{{x.author}}" data-toggle="modal" ng-click="editconfirm(x)">Edit</a>|<a class="edlink" data-target="#myModalDel" data-toggle="modal" ng-click="deleteconfirm(x)">Delete</a></div>
+                    <div edit-dialog edit-name="{{x.title}}" edit-author="{{x.author}}" edit-like="{{x.like}}" edit-comment="{{x.comment}}" editor="editor()"></div>
+                    <div delete-dialog></div>
     			</li>
     		</ul>
     	</div>
 
-    	<div id="listView" ui-view>
-    		<table>
-    		    <tr class="col-md-12" ng-repeat="x in works">
-    			    <td><b>{{x.title}}</b></td>
+    	<div id="listView" ng-show="myVar2">
+    		<table class="col-md-12">
+                <tr>
+                    <th ng-click="orderByMe('title')">Name</th>
+                    <th ng-click="orderByMe('author')">Author</th>
+                    <th ng-click="orderByMe('like')">Like</th>
+                    <th ng-click="orderByMe('comment')">Comment</th>
+                    <th>Modify</th>
+                    <th>Remove</th>
+                </tr>
+    		    <tr ng-repeat="x in works|orderBy:myorder|filter:filtername|filter:filterauthor|filter:filterlike|filter:filtercomment">
+    			    <td>{{x.title}}</td>
     				<td>{{x.author}}</td>
     				<td>{{x.like}}</td>
     				<td>{{x.comment}}</td>
-    				<td><a href="#">Edit</a></td>
-    				<td><a href="#">Delete</a></td>
-    			</td>
+    				<td><a class="edlink" data-target="#myModalEdit" data-toggle="modal">Edit</a></td>
+                    <edit-dialog></edit-dialog>
+    				<td><a class="edlink" data-target="#myModalDel" data-toggle="modal">Delete</a></td>
     			</tr>
     		</table>
     	</div>
