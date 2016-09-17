@@ -1,22 +1,20 @@
 'use strict';
 // SESSION SERVICE
-// Description: Define the sessionService that has 3 functionalities: 
+// Description: Define the sessionService that has 3 functi""onalities: 
 // get, set, and destroy for users' data in the session storage
-var sessionService = angular.module("sessionService", []);
+var sessionService = angular.module("sessionService", ["ngStorage"]);
 sessionService
-	.factory("sessionService", function($http){
-		/*	Define a variable to store the user information in the session   */
-		var userInSession;
+	.factory("sessionService", function($http, $sessionStorage){
 		/*	Return an object	*/
 		return {
 			getUser: function(){		
-				return userInSession
+				return $sessionStorage.user;
 			},
 			setUser: function(user){
-				userInSession = user;
+				$sessionStorage.user = user;
 			},
 			destroyUser: function(){
-				userInSession = null;
+				$sessionStorage.user = null;
 			}
 		}
 	})
