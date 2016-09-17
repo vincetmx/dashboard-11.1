@@ -1,0 +1,24 @@
+<div class="modal" id="myModalEdit" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-md">
+    
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="addItemTitle"><b>Edit item</b></div>
+            </div>
+            <div class="modal-body">
+                <form>
+                <div class="form-group"><input class="form-control" type="text" name="name" ng-model="titleEdit"></div>
+                <div class="form-group"><input class="form-control" type="text" name="author" ng-model="authorEdit"></div>
+                <div class="form-group"><input class="form-control" type="text" name="like" ng-model="likeEdit"></div>
+                <div class="form-group"><input class="form-control" type="text" name="comment" ng-model="commentEdit"></div>
+               </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" ng-click="editItem()" data-dismiss="modal">submit</button>     
+                <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
+            </div>
+        </div> 
+    </div>
+</div>
+
