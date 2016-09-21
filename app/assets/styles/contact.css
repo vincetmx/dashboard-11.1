@@ -1,0 +1,13 @@
+.nav {
+  text-align: center; }
+
+#detailDiv {
+  border: 1px solid lightgray; }
+
+.title, #describtion {
+  font-size: 18px;
+  padding: 5px 0px; }
+
+.detail {
+  font-size: 18px;
+  padding: 5px 20px; }

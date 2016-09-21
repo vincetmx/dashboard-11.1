@@ -1,0 +1,22 @@
+$size:18px;
+$padding-tb:5px;
+$padding-lr1:0px;
+$padding-lr2:20px;
+
+.nav{
+	text-align:center;
+}
+#detailDiv{
+	border:1px solid lightgray;
+}
+.title{
+	font-size:$size;
+	padding:$padding-tb $padding-lr1;
+}
+#describtion{
+	@extend .title;
+}
+.detail{
+	font-size:$size;
+	padding:$padding-tb $padding-lr2;
+}

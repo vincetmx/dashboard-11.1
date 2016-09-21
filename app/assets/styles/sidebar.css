@@ -12,7 +12,7 @@
 	color:white;
 	background-color: red;
 }
-.iconDiv:active{
+.iconDiv:visited{
 	color:red;
 	border-left: 4px solid red;
 }

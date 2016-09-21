@@ -7,7 +7,7 @@
  *
  * Main module of the application. Define the routing architecture for the app
  */
- var app = angular.module('app',["ui.router"]);
+ var app = angular.module('app',["ui.router","ui.bootstrap"]);
  app.config(function($stateProvider,$urlRouterProvider){
  	$urlRouterProvider.otherwise("/login");
 
@@ -40,7 +40,7 @@
  	.state('root.contact',
  		{
  			url:"/contact",
- 			templateUrl:"templates/contact.html"
+ 			templateUrl:"templates/contact.html",
  		});
 
  });
