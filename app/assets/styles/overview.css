@@ -1,0 +1,14 @@
+.userProf {
+  margin-left: 10%;
+  width: 80%; }
+  .userProf h2 {
+    font-size: 20px; }
+  .userProf .photo {
+    width: 25%;
+    margin-top: 5%; }
+    .userProf .photo img {
+      width: 100%; }
+  .userProf .intro {
+    margin-top: 5%; }
+    .userProf .intro p {
+      font-size: 20px; }

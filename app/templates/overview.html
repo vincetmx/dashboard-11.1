@@ -1,5 +1,32 @@
 <div id="overview">
 	<div>
 	<h1>Overview</h1>
+	<div class="container">
+	<div class="jumbotron">
+	<div ng-controller="UserProfInfoCrtl" class="userProf">
+		<h2>{{ userProf.userName }} - {{ userProf.nickname }},</h2>
+		<div class="photo">
+			<img src="{{ userProf.profileImage }}">
+		</div>
+		<div class="intro">
+			<p>Welcome to dashboard application. This application guide will introduce you to things that you can do while staying here. All the sections mentioned below can be accessed from the navigation menu on the left side</p>
+		</div>
+		<div>
+			  <div class="panel panel-default">
+			    <div class="panel-heading" data-toggle="collapse" data-target="#list1"><p><b>Work Section</b></p></div>
+			    <div id="list1" class="panel-body collapse"><p>This section contains the demonstration for all the final products that has been produced in the market</p></div>
+			  </div>
+			  <div class="panel panel-default">
+			    <div class="panel-heading" data-toggle="collapse" data-target="#list2"><p><b>Producer Section</b></p></div>
+			    <div id="list2" class="panel-body collapse"><p>This section contains information about the creater of all the work and how to get in touch with them</p></div>
+			  </div>
+			  <div class="panel panel-default">
+			    <div class="panel-heading" data-toggle="collapse" data-target="#list3"><p><b>Contact Section</b></p></div>
+			    <div id="list3" class="panel-body collapse"><p>This section provides a gateway for users to voice out opinions regarding the application and other questions or concerns that one might have</p></div>
+			  </div>
+		</div>
+	</div>
+	</div>
+	</div>
 	</div>
 </div>

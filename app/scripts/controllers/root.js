@@ -10,7 +10,7 @@ app
 		$scope.user = {};
 		/*	Here invokes the service method to retrieve the user's information displayed on the header  */
 		$scope.user = {
-			userName: getUserService.getUser().userName
+			userName: getUserService.getUser().name
 		}
 	})
 	.controller("LogoutCtrl", function($scope, authenticateService){

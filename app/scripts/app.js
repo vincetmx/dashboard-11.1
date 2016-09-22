@@ -7,7 +7,7 @@
  *
  * Main module of the application. Define the routing architecture for the app
  */
- var app = angular.module('app',["ui.router", "authenticateService", "getUserService", "sessionService"]);
+ var app = angular.module('app',["ui.router", "authenticateService", "getUserService", "sessionService", "getProfileService"]);
  app.config(function($stateProvider,$urlRouterProvider){
  	$urlRouterProvider.otherwise("/login");
 

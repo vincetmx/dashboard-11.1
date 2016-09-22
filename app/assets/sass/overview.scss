@@ -1,0 +1,22 @@
+$size : 20px;
+.userProf{
+	margin-left: 10%;
+	width: 80%;
+	h2{
+
+		font-size: $size;
+	}
+	.photo{
+		width: 25%;
+		margin-top: 5%;
+		img{
+			width: 100%;
+		}
+	}
+	.intro{
+        margin-top: 5%;
+        p{
+        	font-size: $size;
+        }
+	}
+}

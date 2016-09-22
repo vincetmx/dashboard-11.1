@@ -21,10 +21,33 @@ authenticateService
 					function(response){
 						/*	Set the logged flag to true  */
 						isUserLogged = true;
-						/*	Save the user information to the session through sessionService  */
-						sessionService.setUser(user);
-						/*	Jump to the root page with the assistance of routes	 */
-						$location.url("/root");
+						$http({
+							method: "GET",
+							url: "/api/getuser?user=" + user.userName,
+							// data: user.userName,
+							// qs:{req.query.user : user.userName}
+						})
+						.then(function(response){
+					        	/*	Save the user information to the session through sessionService  */
+								sessionService.setUser(response.data);
+								/*	Jump to the root page with the assistance of routes	 */
+								$location.url("/root");
+							});
+						$http({
+							method:"GET",
+							url:"/api/profile",
+						})
+						.then(
+							function(response){
+								// sessionService.setUserProfile(response.data.profiles[0]);
+								var userProfile = response.data.profiles;
+								for (var i = userProfile.length - 1; i >= 0; i--) {
+									if (userProfile[i].username===user.userName){
+										sessionService.setUserProfile(userProfile[i]);
+									}
+								}
+						})
+						// $location.url("/work");
 					}, 
 					/*	If fail, execute this function  */
 					function(response){
