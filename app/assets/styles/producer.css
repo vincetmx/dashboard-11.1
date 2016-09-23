@@ -1,0 +1,108 @@
+#ball_board{
+	width:1400px;
+	height:300px;
+	background-color:green;
+	border-radius:8px;
+	border:2px solid gray; 
+}
+
+.ball_box{
+	position:relative;
+	float:left;
+	margin-top:30px;
+	margin-left:45px;
+	width: 220px;
+	height:220px;
+}
+
+.showwhiteball{
+	position: absolute;
+	z-index: 100;
+	top:20px;
+	left:20px;
+}
+
+#selector1{
+    margin-left:100px;
+}
+
+.selector{
+	width:120px;
+	height:50px;
+	margin-left:140px;
+	font-size: 30px;
+	text-align: center;
+}
+
+#rollbtn{
+	margin-left:630px !important;
+}
+
+#card_board{
+	position: relative;
+	width:1400px;
+	height:600px;
+	background-color:green;
+	border-radius:8px;
+	border:2px solid gray; 
+}
+
+#enemycard1{
+	margin-left:80px;
+}
+
+.enemycards{
+	float:left;
+	margin-left:115px;
+	width:150px;
+	height: 225px;
+	border:2px solid red;
+}
+
+#mycard1{
+	margin-left:80px;
+}
+
+.mycards{
+	float:left;
+	margin-left:115px;
+	bottom: 0px;
+	width:150px;
+	height: 225px;
+	border:2px solid red;
+}
+
+#getcardsbtn{
+	margin-top:45px;
+	margin-left:500px;
+}
+
+#winbtn{
+	margin-top:45px;
+	margin-left:80px;
+}
+
+#resetbtn{
+	margin-top:45px;
+	margin-left:80px;
+}
+
+#result_win{
+   position:absolute;
+   width:200px;
+   height:100px;
+   left:650px;
+   top:330px;
+   font-size: 30px;
+   color:white;
+}
+
+#result_lose{
+   position:absolute;
+   width:200px;
+   height:100px;
+   left:650px;
+   top:330px;
+   font-size: 30px;
+   color:white;
+}

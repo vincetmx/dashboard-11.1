@@ -1,5 +1,39 @@
-<div id="producer">
+<div id="producer" ng-controller="producerCtrl">
 	<div>
-	<h1>Producer</h1>
+	    <h1>Producer</h1>
+		<div id="ball_board">
+			<div class="ball_box"><img src="assets/images/src/producer/balls/Ballbox.png" style="width:100%"><img class="showwhiteball" src="assets/images/src/producer/balls/W{{selectedWhiteball1.num}}.png" style="width:80%"></div>
+			<div class="ball_box"><img src="assets/images/src/producer/balls/Ballbox.png" style="width:100%"><img class="showwhiteball" src="assets/images/src/producer/balls/W{{selectedWhiteball2.num}}.png" style="width:80%"></div>
+			<div class="ball_box"><img src="assets/images/src/producer/balls/Ballbox.png" style="width:100%"><img class="showwhiteball" src="assets/images/src/producer/balls/W{{selectedWhiteball3.num}}.png" style="width:80%"></div>
+			<div class="ball_box"><img src="assets/images/src/producer/balls/Ballbox.png" style="width:100%"><img class="showwhiteball" src="assets/images/src/producer/balls/W{{selectedWhiteball4.num}}.png" style="width:80%"></div>
+			<div class="ball_box"><img src="assets/images/src/producer/balls/Ballbox.png" style="width:100%"><img class="showwhiteball" src="assets/images/src/producer/balls/W{{selectedWhiteball5.num}}.png" style="width:80%"></div>
+			<button id="rollbtn" class="btn btn-info" ng-click="randompick()">Roll Balls</button>
+		</div>
+        <select class="selector" ng-model="selectedWhiteball1" ng-options="x.num for x in whiteball1|filter:selectedWhiteball2:not|filter:selectedWhiteball3:not|filter:selectedWhiteball4:not|filter:selectedWhiteball5:not" id="selector1" ng-click="selector1dirty()"></select>
+        <select class="selector" ng-model="selectedWhiteball2" ng-options="x.num for x in whiteball2|filter:selectedWhiteball1:not|filter:selectedWhiteball3:not|filter:selectedWhiteball4:not|filter:selectedWhiteball5:not" ng-click="selector2dirty()"></select>
+        <select class="selector" ng-model="selectedWhiteball3" ng-options="x.num for x in whiteball3|filter:selectedWhiteball1:not|filter:selectedWhiteball2:not|filter:selectedWhiteball4:not|filter:selectedWhiteball5:not" ng-click="selector3dirty()"></select>
+        <select class="selector" ng-model="selectedWhiteball4" ng-options="x.num for x in whiteball4|filter:selectedWhiteball1:not|filter:selectedWhiteball2:not|filter:selectedWhiteball3:not|filter:selectedWhiteball5:not" ng-click="selector4dirty()"></select>
+        <select class="selector" ng-model="selectedWhiteball5" ng-options="x.num for x in whiteball5|filter:selectedWhiteball1:not|filter:selectedWhiteball2:not|filter:selectedWhiteball3:not|filter:selectedWhiteball4:not" ng-click="selector5dirty()"></select>
+        <div></div>
+        
+        <div id="card_board">
+        	<div class="enemycards" id="enemycard1"><img src={{enemycard1.src}} style="width:100%"></div>
+        	<div class="enemycards"><img src={{enemycard2.src}} style="width:100%"></div>
+        	<div class="enemycards"><img src={{enemycard3.src}} style="width:100%"></div>
+        	<div class="enemycards"><img src={{enemycard4.src}} style="width:100%"></div>
+        	<div class="enemycards"><img src={{enemycard5.src}} style="width:100%"></div>
+        	<div style="float:left;width:1400px;height:148px;">
+        		  <button id="getcardsbtn" class="btn btn-info" ng-click="getcards()">Get Cards</button>
+        	      <button id="winbtn" class="btn btn-danger" ng-click="showresult()">Show Cards</button>
+        	      <button id="resetbtn" class="btn btn-warning" ng-click="resetgame()">Reset Game</button>
+        	      <div id="result_win" ng-if="gameresult_win">You Win</div>
+        	      <div id="result_lose" ng-if="gameresult_lose">You Lose</div>
+        	</div>
+        	<div class="mycards" id="mycard1"><img src={{mycard1.src}} style="width:100%"></div>
+        	<div class="mycards"><img src={{mycard2.src}} style="width:100%"></div>
+        	<div class="mycards"><img src={{mycard3.src}} style="width:100%"></div>
+        	<div class="mycards"><img src={{mycard4.src}} style="width:100%"></div>
+        	<div class="mycards"><img src={{mycard5.src}} style="width:100%"></div>
+        </div>
 	</div>
 </div>
