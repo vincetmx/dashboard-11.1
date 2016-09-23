@@ -138,6 +138,8 @@ app.controller('producerCtrl',function($scope){
 
     var enemyhasAce=false;
     var myhasAce=false;
+
+    var enemyAI=false;
     
     var resultOn=false;
 
@@ -180,6 +182,9 @@ app.controller('producerCtrl',function($scope){
                 if(mycard1show.num==1||mycard2show.num==1){
                     myhasAce=true;
                 }
+                if(enemycard1show.num+enemycard2show.num>16+Math.ceil(Math.random()*3)){
+                    enemyAI=true;
+                }
 	        }
 	        if(getcardsclick==3){
 	        	do{
@@ -188,9 +193,14 @@ app.controller('producerCtrl',function($scope){
 	        		var tmparr=[enemycard1number,mycard1number,enemycard2number,mycard2number,enemycard3number,mycard3number];
 	        	}while(filtersame(tmparr))
 	           
-				enemycard3show={num:cardArr[enemycard3number].num,src:cardArr[enemycard3number].src};
+                if(!enemyAI){
+                    enemycard3show={num:cardArr[enemycard3number].num,src:cardArr[enemycard3number].src};
+                    $scope.enemycard3={num:cardArr[enemycard3number].num,src:"assets/images/src/producer/cards/55.jpg"};
+                }else{
+                    enemycard3show={num:0,src:""};
+                }
+
 				mycard3show={num:cardArr[mycard3number].num};
-	            $scope.enemycard3={num:cardArr[enemycard3number].num,src:"assets/images/src/producer/cards/55.jpg"};
 	            $scope.mycard3={num:cardArr[mycard3number].num,src:cardArr[mycard3number].src};
 
 	            if(mycard1show.num+mycard2show.num+mycard3show.num>21){
@@ -214,6 +224,9 @@ app.controller('producerCtrl',function($scope){
                 if(mycard1show.num==1||mycard2show.num==1||mycard3show.num==1){
                     myhasAce=true;
                 }
+                if(enemycard1show.num+enemycard2show.num+enemycard3show.num>16+Math.ceil(Math.random()*3)){
+                    enemyAI=true;
+                }
 	        }
 	        if(getcardsclick==4){
 	        	do{
@@ -222,9 +235,14 @@ app.controller('producerCtrl',function($scope){
 	        		var tmparr=[enemycard1number,mycard1number,enemycard2number,mycard2number,enemycard3number,mycard3number,enemycard4number,mycard4number];
 	        	}while(filtersame(tmparr))
 	           
-				enemycard4show={num:cardArr[enemycard4number].num,src:cardArr[enemycard4number].src};
+                if(!enemyAI){
+                    enemycard4show={num:cardArr[enemycard4number].num,src:cardArr[enemycard4number].src};
+                    $scope.enemycard4={num:cardArr[enemycard4number].num,src:"assets/images/src/producer/cards/55.jpg"};
+                }else{
+                    enemycard4show={num:0,src:""};
+                }
+
 				mycard4show={num:cardArr[mycard4number].num};
-	            $scope.enemycard4={num:cardArr[enemycard4number].num,src:"assets/images/src/producer/cards/55.jpg"};
 	            $scope.mycard4={num:cardArr[mycard4number].num,src:cardArr[mycard4number].src};
 
 	            if(mycard1show.num+mycard2show.num+mycard3show.num+mycard4show.num>21){
@@ -250,6 +268,9 @@ app.controller('producerCtrl',function($scope){
                 if(mycard1show.num==1||mycard2show.num==1||mycard3show.num==1||mycard4show.num==1){
                     myhasAce=true;
                 }
+                if(enemycard1show.num+enemycard2show.num+enemycard3show.num+enemycard4show.num>16+Math.ceil(Math.random()*3)){
+                    enemyAI=true;
+                }
 	        }
 	        if(getcardsclick==5){
 	        	do{
@@ -258,9 +279,14 @@ app.controller('producerCtrl',function($scope){
 	           		var tmparr=[enemycard1number,mycard1number,enemycard2number,mycard2number,enemycard3number,mycard3number,enemycard4number,mycard4number,enemycard5number,mycard5number];
 	        	}while(filtersame(tmparr))
 	           
-				enemycard5show={num:cardArr[enemycard5number].num,src:cardArr[enemycard5number].src};
+                if(!enemyAI){
+                    enemycard5show={num:cardArr[enemycard5number].num,src:cardArr[enemycard5number].src};
+                    $scope.enemycard5={num:cardArr[enemycard5number].num,src:"assets/images/src/producer/cards/55.jpg"};
+                }else{
+                    enemycard5show={num:0,src:""};
+                }
+
 				mycard5show={num:cardArr[mycard5number].num};
-	            $scope.enemycard5={num:cardArr[enemycard5number].num,src:"assets/images/src/producer/cards/55.jpg"};
 	            $scope.mycard5={num:cardArr[mycard5number].num,src:cardArr[mycard5number].src};
 
 	            if(mycard1show.num+mycard2show.num+mycard3show.num+mycard4show.num+mycard5show.num>21){
@@ -281,7 +307,7 @@ app.controller('producerCtrl',function($scope){
                 	$scope.gameresult_win=true;
                 	resultOn=true;
                 }
-                if(enemycard1show.num==1||enemycard2show.num==1||enemycardshow.num==1||enemycard4show.num==1||enemycard5show.num==1){
+                if(enemycard1show.num==1||enemycard2show.num==1||enemycard3show.num==1||enemycard4show.num==1||enemycard5show.num==1){
                     enemyhasAce=true;
                 }
                 if(mycard1show.num==1||mycard2show.num==1||mycard3show.num==1||mycard4show.num==1||mycard5show.num==1){
@@ -298,22 +324,24 @@ app.controller('producerCtrl',function($scope){
     var sumofarr2=0;
 
     function gameset(arr1,arr2,enemyhasace,myhasace){
-
         for(var i=0;i<arr1.length;i++){
         	sumofarr1+=arr1[i];
         }
         for(var j=0;j<arr2.length;j++){
         	sumofarr2+=arr2[j];
         }
+        
+        console.log(sumofarr1);
+        console.log(sumofarr2);
 
         if(enemyhasace){
-            if(sumofarr1+20<=42){
-                sumofarr1+=20;
+            if(sumofarr1<=11){
+                sumofarr1+=10;
             }
         }
         if(myhasace){
-            if(sumofarr2+20<=42){
-                sumofarr2+=20;
+            if(sumofarr2<=11){
+                sumofarr2+=10;
             }
         }
         if(sumofarr1>sumofarr2){
@@ -328,31 +356,31 @@ app.controller('producerCtrl',function($scope){
     		var tmp1=[enemycard1show.num];
     		var tmp2=[mycard1show.num];
         	$scope.gameresult_win=gameset(tmp1,tmp2,enemyhasAce,myhasAce);
-        	$scope.gameresult_lose=!gameset(tmp1,tmp2,enemyhasAce,myhasAce);
+        	$scope.gameresult_lose=!$scope.gameresult_win;
         };
         if(getcardsclick==3){
         	var tmp1=[enemycard1show.num,enemycard2show.num];
     		var tmp2=[mycard1show.num,mycard2show.num];
         	$scope.gameresult_win=gameset(tmp1,tmp2,enemyhasAce,myhasAce);
-        	$scope.gameresult_lose=!gameset(tmp1,tmp2,enemyhasAce,myhasAce);
+        	$scope.gameresult_lose=!$scope.gameresult_win;
         };
         if(getcardsclick==4){
         	var tmp1=[enemycard1show.num,enemycard2show.num,enemycard3show.num];
     		var tmp2=[mycard1show.num,mycard2show.num,mycard3show.num];
         	$scope.gameresult_win=gameset(tmp1,tmp2,enemyhasAce,myhasAce);
-        	$scope.gameresult_lose=!gameset(tmp1,tmp2,enemyhasAce,myhasAce);
+        	$scope.gameresult_lose=!$scope.gameresult_win;
         };
         if(getcardsclick==5){
         	var tmp1=[enemycard1show.num,enemycard2show.num,enemycard3show.num,enemycard4show.num];
     		var tmp2=[mycard1show.num,mycard2show.num,mycard3show.num,mycard4show.num];
         	$scope.gameresult_win=gameset(tmp1,tmp2,enemyhasAce,myhasAce);
-        	$scope.gameresult_lose=!gameset(tmp1,tmp2,enemyhasAce,myhasAce);
+        	$scope.gameresult_lose=!$scope.gameresult_win;
         };
         if(getcardsclick==6){
         	var tmp1=[enemycard1show.num,enemycard2show.num,enemycard3show.num,enemycard4show.num,enemycard5show.num];
     		var tmp2=[mycard1show.num,mycard2show.num,mycard3show.num,mycard4show.num,mycard5show.num];
         	$scope.gameresult_win=gameset(tmp1,tmp2,enemyhasAce,myhasAce);
-        	$scope.gameresult_lose=!gameset(tmp1,tmp2,enemyhasAce,myhasAce);
+        	$scope.gameresult_lose=!$scope.gameresult_win;
         };
     }
 
@@ -373,6 +401,7 @@ app.controller('producerCtrl',function($scope){
 		resultOn=false;
         enemyhasAce=false;
         myhasAce=false;
+        enemyAI=false;
 		getcardsclick=1;
 		sumofarr1=0;
 		sumofarr2=0;

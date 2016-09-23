@@ -56,7 +56,7 @@
 	margin-left:115px;
 	width:150px;
 	height: 225px;
-	border:2px solid red;
+	border:5px solid white;
 }
 
 #mycard1{
@@ -69,7 +69,7 @@
 	bottom: 0px;
 	width:150px;
 	height: 225px;
-	border:2px solid red;
+	border:5px solid white;
 }
 
 #getcardsbtn{
