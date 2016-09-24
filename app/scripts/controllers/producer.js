@@ -2,7 +2,7 @@
 // PRODUCER CONTROLLER
 // Description: Define the following functionalities:
 // Creative manipulations for whatever stuff this section wants to do
-app.controller('producerCtrl',function($scope){
+app.controller('producerCtrl',function($scope,$timeout){
 	var whiteballArr=[];
 	for(var i=0;i<69;i++){
 	   var tmp={num:(i+1)}
@@ -97,6 +97,34 @@ app.controller('producerCtrl',function($scope){
             selector4dirty=false;
             selector5dirty=false;
 	};
+    
+    $scope.lotteryswitch1=true;
+    $scope.lotteryswitch2=false;
+
+    $scope.blackjackswitch1=true;
+    $scope.blackjackswitch2=false;
+
+    $scope.rouletteswitch1=true;
+    $scope.rouletteswitch2=false;
+
+    $scope.showlotteryboard=function(value){
+        $scope.lotteryswitch1=value;
+        $scope.lotteryswitch2=!value;
+    }
+
+    $scope.switchblackjack=function(value){
+        $scope.blackjackswitch1=value;
+        $scope.blackjackswitch2=!value;
+    }
+
+    $scope.switchroulette=function(value){
+        $scope.rouletteswitch1=value;
+        $scope.rouletteswitch2=!value;
+        round=0;
+        document.getElementById('roulette').style.transition="ease-out 0s";
+        document.getElementById('roulette').style.transform="rotate("+round+"deg)";
+        $scope.decision="";
+    }
 
     var cardArr=[];
     for(var i=1,j=1,k=0;i<53;i++){
@@ -396,6 +424,49 @@ app.controller('producerCtrl',function($scope){
         }
         console.log(sumofarr1+" "+sumofarr2);
 	};
+    
+    var round=0;
+
+    $scope.playroulette=function(){
+        var timer=0;
+        return function(){
+               $timeout.cancel(timer);
+               round+=1080+Math.ceil(Math.random()*360);
+               document.getElementById('roulette').style.transition="ease-out 5s";
+               document.getElementById('roulette').style.transform="rotate("+round+"deg)";
+                      
+                if(round%360<=36){
+                    timer=$timeout(function(){
+                       $scope.decision="assets/images/src/producer/cooking.png";
+                    },5100);
+                }else if(round%360>36&&round%360<=108){
+                    timer=$timeout(function(){
+                        $scope.decision="assets/images/src/producer/washing.png";
+                    },5100);
+                }else if(round%360>108&&round%360<=180){
+                    timer=$timeout(function(){
+                        $scope.decision="assets/images/src/producer/game.png";
+                    },5100);
+                }else if(round%360>180&&round%360<=252){
+                    timer=$timeout(function(){
+                        $scope.decision="assets/images/src/producer/learning.png";
+                    },5100);
+                }else if(round%360>252&&round%360<=324){
+                    timer=$timeout(function(){
+                         $scope.decision="assets/images/src/producer/movie.png";
+                    },5100);
+                }else if(round%360>324&&round%360<=360){
+                    timer=$timeout(function(){
+                       $scope.decision="assets/images/src/producer/cooking.png";
+                    },5100);
+                }
+                console.log(round);
+                $timeout(function(){
+                       console.log($scope.decision);
+                },5200);
+                
+        }
+    }();
 
 	$scope.resetgame=function(){
 		resultOn=false;
@@ -427,5 +498,5 @@ app.controller('producerCtrl',function($scope){
         mycard5show={};
         $scope.gameresult_lose=false;
         $scope.gameresult_win=false;
-	}
+	};
 })

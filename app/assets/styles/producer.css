@@ -1,3 +1,17 @@
+#lottery_gif{
+	width:1400px;
+	height:380px;
+}
+
+#lottery_gif:hover{
+    cursor:pointer;
+}
+
+#lottery_body{
+	width:1400px;
+	height:380px;
+}
+
 #ball_board{
 	width:1400px;
 	height:300px;
@@ -36,6 +50,30 @@
 
 #rollbtn{
 	margin-left:630px !important;
+}
+
+#closelotterybtn{
+	margin-left:410px !important;
+}
+
+#myCarousel{
+	width:1400px;
+	height:600px;
+}
+
+#blackjackbtn{
+	position: absolute;
+	left:635px;
+	top:450px;
+}
+
+#blackjack_gif{
+	width:1400px;
+	height:600px;
+}
+
+#blackjack_gif:hover{
+    cursor:pointer;
 }
 
 #card_board{
@@ -87,6 +125,11 @@
 	margin-left:80px;
 }
 
+#closeblackjackbtn{
+	margin-top:45px;
+	margin-left:80px;
+}
+
 #result_win{
    position:absolute;
    width:200px;
@@ -105,4 +148,52 @@
    top:330px;
    font-size: 30px;
    color:white;
+}
+
+#roulette_gif{
+	width:1400px;
+	height:800px;
+}
+
+#roulette_gif:hover{
+    cursor:pointer;
+}
+
+#roulette_board{
+	width:1400px;
+	height:800px;
+	background-color:green;
+	border-radius:8px;
+	border:2px solid gray; 
+	position: relative;
+}
+
+#roulette_pointer{
+    position: absolute;
+	left:650px;
+	top:10px;
+}
+
+#roulette_body{
+	position: absolute;
+	left:400px;
+	top:80px;
+}
+
+#playroulette{
+	position: absolute;
+	left:540px;
+	bottom:30px;
+}
+
+#roulette_img{
+	position: absolute;
+	left:120px;
+	top:230px;
+}
+
+#closeroulettebtn{
+	position: absolute;
+	left:900px;
+	bottom:30px;
 }
