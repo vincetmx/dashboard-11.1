@@ -2,7 +2,7 @@
 // PRODUCER CONTROLLER
 // Description: Define the following functionalities:
 // Creative manipulations for whatever stuff this section wants to do
-app.controller('producerCtrl',function($scope,$timeout){
+app.controller('producerCtrl',function($scope,$timeout,$interval){
 	var whiteballArr=[];
 	for(var i=0;i<69;i++){
 	   var tmp={num:(i+1)}
@@ -107,6 +107,9 @@ app.controller('producerCtrl',function($scope,$timeout){
     $scope.rouletteswitch1=true;
     $scope.rouletteswitch2=false;
 
+    $scope.eyetrainingswitch1=true;
+    $scope.eyetrainingswitch2=false;
+
     $scope.showlotteryboard=function(value){
         $scope.lotteryswitch1=value;
         $scope.lotteryswitch2=!value;
@@ -124,6 +127,11 @@ app.controller('producerCtrl',function($scope,$timeout){
         document.getElementById('roulette').style.transition="ease-out 0s";
         document.getElementById('roulette').style.transform="rotate("+round+"deg)";
         $scope.decision="";
+    }
+
+    $scope.switcheyetraining=function(value){
+        $scope.eyetrainingswitch1=value;
+        $scope.eyetrainingswitch2=!value;
     }
 
     var cardArr=[];
@@ -425,6 +433,39 @@ app.controller('producerCtrl',function($scope,$timeout){
         console.log(sumofarr1+" "+sumofarr2);
 	};
     
+    
+	$scope.resetgame=function(){
+		resultOn=false;
+        enemyhasAce=false;
+        myhasAce=false;
+        enemyAI=false;
+		getcardsclick=1;
+		sumofarr1=0;
+		sumofarr2=0;
+		$scope.enemycard1=null;
+		$scope.enemycard2=null;
+		$scope.enemycard3=null;
+		$scope.enemycard4=null;
+		$scope.enemycard5=null;
+		$scope.mycard1=null;
+		$scope.mycard2=null;
+		$scope.mycard3=null;
+		$scope.mycard4=null;
+		$scope.mycard5=null;
+		enemycard1show={};
+	    enemycard2show={};
+	    enemycard3show={};
+	    enemycard4show={};
+	    enemycard5show={};
+	    mycard1show={};
+        mycard2show={};
+        mycard3show={};
+        mycard4show={};
+        mycard5show={};
+        $scope.gameresult_lose=false;
+        $scope.gameresult_win=false;
+	};
+
     var round=0;
 
     $scope.playroulette=function(){
@@ -467,36 +508,212 @@ app.controller('producerCtrl',function($scope,$timeout){
                 
         }
     }();
+    
+    var eyetraningcard1show={};
+    var eyetraningcard2show={};
+    var eyetraningcard3show={};
 
-	$scope.resetgame=function(){
-		resultOn=false;
-        enemyhasAce=false;
-        myhasAce=false;
-        enemyAI=false;
-		getcardsclick=1;
-		sumofarr1=0;
-		sumofarr2=0;
-		$scope.enemycard1=null;
-		$scope.enemycard2=null;
-		$scope.enemycard3=null;
-		$scope.enemycard4=null;
-		$scope.enemycard5=null;
-		$scope.mycard1=null;
-		$scope.mycard2=null;
-		$scope.mycard3=null;
-		$scope.mycard4=null;
-		$scope.mycard5=null;
-		enemycard1show={};
-	    enemycard2show={};
-	    enemycard3show={};
-	    enemycard4show={};
-	    enemycard5show={};
-	    mycard1show={};
-        mycard2show={};
-        mycard3show={};
-        mycard4show={};
-        mycard5show={};
-        $scope.gameresult_lose=false;
-        $scope.gameresult_win=false;
-	};
+    var eyetraningcard1number=0;
+    var eyetraningcard2number=0;
+    var eyetraningcard3number=0;
+
+    var movingcard1=document.getElementById('movingcard1');
+    var movingcard2=document.getElementById('movingcard2');
+    var movingcard3=document.getElementById('movingcard3');
+
+    $scope.eyetraining_getcards=function(){
+        do{
+            eyetraningcard1number=Math.ceil(Math.random()*52);
+            eyetraningcard2number=Math.ceil(Math.random()*52);
+            eyetraningcard3number=Math.ceil(Math.random()*52);
+
+            var tmparr=[eyetraningcard1number,eyetraningcard2number,eyetraningcard3number];
+        }while(filtersame(tmparr))
+       
+        $scope.eyetrainingcard1={num:cardArr[eyetraningcard1number].num,src:cardArr[eyetraningcard1number].src};
+        $scope.eyetrainingcard2={num:cardArr[eyetraningcard2number].num,src:cardArr[eyetraningcard2number].src};
+        $scope.eyetrainingcard3={num:cardArr[eyetraningcard3number].num,src:cardArr[eyetraningcard3number].src};
+
+        var decide_target=Math.ceil(Math.random()*3);
+        if(decide_target==1){
+            $scope.eyetrainingtargetcard={num:cardArr[eyetraningcard1number].num,src:cardArr[eyetraningcard1number].src};
+        }
+        if(decide_target==2){
+            $scope.eyetrainingtargetcard={num:cardArr[eyetraningcard2number].num,src:cardArr[eyetraningcard2number].src};
+        }
+        if(decide_target==3){
+            $scope.eyetrainingtargetcard={num:cardArr[eyetraningcard3number].num,src:cardArr[eyetraningcard3number].src};
+        }
+        movingcard1.style.left="150px";
+        movingcard2.style.left="400px";
+        movingcard3.style.left="650px";
+
+        movingcard1.style.transition="ease-out 0.3s";
+        movingcard2.style.transition="ease-out 0.3s";
+        movingcard3.style.transition="ease-out 0.3s";
+    };
+    
+    var eyetrainingreday=false; 
+    var chooserightcard=false;
+
+    $scope.eyetraining_ready=function(){
+        $scope.eyetrainingcard1.src="assets/images/src/producer/cards/55.jpg";
+        $scope.eyetrainingcard2.src="assets/images/src/producer/cards/55.jpg";
+        $scope.eyetrainingcard3.src="assets/images/src/producer/cards/55.jpg";
+        eyetrainingreday=true;
+    }
+
+    var intervalstart=false; 
+
+    $scope.movingcards=function(){
+        if(eyetrainingreday){
+            intervalstart=true;
+            var moving_time=5000+Math.ceil(Math.random()*3000);
+            $timeout(function(){
+                intervalstart=false;
+                chooserightcard=true; 
+            },moving_time);
+        }
+    }
+
+    $interval(function(){
+        if(intervalstart){
+            var moving_objects=Math.ceil(Math.random()*3);
+            console.log("moving_objects: "+moving_objects);
+            movingProcessing(moving_objects);
+        }
+    },1000);
+
+    function movingProcessing(way){
+        switch(way){
+            case 1:
+               swapCards(1,2);
+               break;
+            case 2:
+               swapCards(1,3);
+               break;
+            case 3:
+               swapCards(2,3);
+               break;
+            default:
+               break;
+        }
+    };
+
+    function swapCards(a,b){
+       updateCards();
+       if(a==1&&b==2){
+            $timeout(function(){updateArr[0].style.left="400px"},300);
+            updateArr[1].style.left="150px";
+       }
+       if(a==1&&b==3){
+            $timeout(function(){updateArr[0].style.left="650px"},300);
+            updateArr[2].style.left="150px";
+       }
+       if(a==2&&b==3){
+            $timeout(function(){updateArr[1].style.left="650px"},300);
+            updateArr[2].style.left="400px";
+       }
+    }
+    
+    var updateArr=[];
+
+    function updateCards(){
+        var dummyArr=[movingcard1,movingcard2,movingcard3,movingcard1,movingcard2,movingcard3,movingcard1,movingcard2,movingcard3];
+        updateArr=[];
+        var update1=true;
+        var update2=false;
+        var update3=false;
+
+        for(var z=0;z<9;z++){
+            if(update1){
+                if(dummyArr[z].style.left=="150px"){
+                    updateArr.push(dummyArr[z]);
+                    update1=false;
+                    update2=true;
+                }
+            }
+            if(update2){
+                if(dummyArr[z].style.left=="400px"){
+                    updateArr.push(dummyArr[z]);
+                    update2=false;
+                    update3=true;
+                }
+            }
+            if(update3){
+                if(dummyArr[z].style.left=="650px"){
+                    updateArr.push(dummyArr[z]);
+                    update3=false;
+                }
+            }
+        }
+        console.log(updateArr);
+        return updateArr;
+    }
+
+    $scope.choosecard1=function(){
+        if(chooserightcard){
+            movingcard1.style.border="5px solid red";
+            $scope.eyetrainingcard1={num:cardArr[eyetraningcard1number].num,src:cardArr[eyetraningcard1number].src};
+            $scope.eyetrainingcard2={num:cardArr[eyetraningcard2number].num,src:cardArr[eyetraningcard2number].src};
+            $scope.eyetrainingcard3={num:cardArr[eyetraningcard3number].num,src:cardArr[eyetraningcard3number].src};
+            chooserightcard=false;
+
+            if($scope.eyetrainingcard1.num==$scope.eyetrainingtargetcard.num){
+                $scope.getrightcard=true;
+            }else{
+                $scope.getwrongcard=true;
+            }
+        }
+    }
+
+    $scope.choosecard2=function(){
+        if(chooserightcard){
+            movingcard2.style.border="5px solid red";
+            $scope.eyetrainingcard1={num:cardArr[eyetraningcard1number].num,src:cardArr[eyetraningcard1number].src};
+            $scope.eyetrainingcard2={num:cardArr[eyetraningcard2number].num,src:cardArr[eyetraningcard2number].src};
+            $scope.eyetrainingcard3={num:cardArr[eyetraningcard3number].num,src:cardArr[eyetraningcard3number].src};
+            chooserightcard=false;
+
+            if($scope.eyetrainingcard2.num==$scope.eyetrainingtargetcard.num){
+                $scope.getrightcard=true;
+            }else{
+                $scope.getwrongcard=true;
+            }
+        }
+    }
+
+    $scope.choosecard3=function(){
+        if(chooserightcard){
+            movingcard3.style.border="5px solid red";
+            $scope.eyetrainingcard1={num:cardArr[eyetraningcard1number].num,src:cardArr[eyetraningcard1number].src};
+            $scope.eyetrainingcard2={num:cardArr[eyetraningcard2number].num,src:cardArr[eyetraningcard2number].src};
+            $scope.eyetrainingcard3={num:cardArr[eyetraningcard3number].num,src:cardArr[eyetraningcard3number].src};
+            chooserightcard=false;
+
+            if($scope.eyetrainingcard3.num==$scope.eyetrainingtargetcard.num){
+                $scope.getrightcard=true;
+            }else{
+                $scope.getwrongcard=true;
+            }
+        }
+    }
+
+    $scope.eyetrainingreset=function(){
+        eyetraningcard1show={};
+        eyetraningcard2show={};
+        eyetraningcard3show={};
+        $scope.eyetrainingcard1=null;
+        $scope.eyetrainingcard2=null;
+        $scope.eyetrainingcard3=null;
+        $scope.eyetrainingtargetcard=null;
+        eyetrainingreday=false;
+        intervalstart=false;
+        chooserightcard=false;
+        $scope.getrightcard=false;
+        $scope.getwrongcard=false;
+        movingcard1.style.border="5px solid white";
+        movingcard2.style.border="5px solid white";
+        movingcard3.style.border="5px solid white";
+    }
 })
