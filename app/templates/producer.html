@@ -67,11 +67,12 @@
                     <img src={{eyetrainingcard3.src}} style="width:100%"/>     
                 </div>
                 <div id="targetcard" class="movingcards">
-                    <img src={{eyetrainingtargetcard.src}} style="width:100%"/>     
+                    <img src={{eyetrainingtargetcard.src}} style="width:100%"/>  
                 </div>
+                <div id="targetdes">Remember this card</div>  
             </div>
-            <div class="eyetrainingresult" ng-if="getrightcard">You are so strong</div>
-            <div class="eyetrainingresult" ng-if="getwrongcard">You sucks</div>
+            <div class="eyetrainingresult" ng-show="getrightcard">You are so strong</div>
+            <div class="eyetrainingresult" ng-show="getwrongcard">Wrong Card</div>
             <div id="control_zone">
                 <button id="eyetraning_getcardsbtn" class="btn btn-info" ng-click="eyetraining_getcards()">Get Cards</button>
                 <button id="eyetraning_readysbtn" class="btn btn-warning" ng-click="eyetraining_ready()">Ready</button>

@@ -661,6 +661,7 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
 
             if($scope.eyetrainingcard1.num==$scope.eyetrainingtargetcard.num){
                 $scope.getrightcard=true;
+                console.log($scope.getrightcard);
             }else{
                 $scope.getwrongcard=true;
             }
@@ -677,6 +678,7 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
 
             if($scope.eyetrainingcard2.num==$scope.eyetrainingtargetcard.num){
                 $scope.getrightcard=true;
+                console.log($scope.getrightcard);
             }else{
                 $scope.getwrongcard=true;
             }
@@ -693,6 +695,7 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
 
             if($scope.eyetrainingcard3.num==$scope.eyetrainingtargetcard.num){
                 $scope.getrightcard=true;
+                console.log($scope.getrightcard);
             }else{
                 $scope.getwrongcard=true;
             }
@@ -715,5 +718,5 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         movingcard1.style.border="5px solid white";
         movingcard2.style.border="5px solid white";
         movingcard3.style.border="5px solid white";
-    }
+    };
 })
