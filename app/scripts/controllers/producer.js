@@ -3,6 +3,60 @@
 // Description: Define the following functionalities:
 // Creative manipulations for whatever stuff this section wants to do
 app.controller('producerCtrl',function($scope,$timeout,$interval){
+    //switch among all the apps
+    $scope.lotteryswitch1=true;
+    $scope.lotteryswitch2=false;
+
+    $scope.blackjackswitch1=true;
+    $scope.blackjackswitch2=false;
+
+    $scope.rouletteswitch1=true;
+    $scope.rouletteswitch2=false;
+
+    $scope.eyetrainingswitch1=true;
+    $scope.eyetrainingswitch2=false;
+
+    $scope.typingswitch1=true;
+    $scope.typingswitch2=false;
+
+    $scope.showlotteryboard=function(value){
+        $scope.lotteryswitch1=value;
+        $scope.lotteryswitch2=!value;
+    }
+
+    $scope.switchblackjack=function(value){
+        $scope.blackjackswitch1=value;
+        $scope.blackjackswitch2=!value;
+    }
+
+    $scope.switchroulette=function(value){
+        $scope.rouletteswitch1=value;
+        $scope.rouletteswitch2=!value;
+        //reset roulette condition
+        round=0;
+        document.getElementById('roulette').style.transition="ease-out 0s";
+        document.getElementById('roulette').style.transform="rotate("+round+"deg)";
+        $scope.decision="";
+    }
+
+    $scope.switcheyetraining=function(value){
+        $scope.eyetrainingswitch1=value;
+        $scope.eyetrainingswitch2=!value;
+    }
+    //switch for bubble,if enter typing app,bubble will be on
+    var bubblefly=false;
+
+    $scope.switchtyping=function(value){
+        $scope.typingswitch1=value;
+        $scope.typingswitch2=!value;
+        if($scope.typingswitch2){
+           bubblefly=true;
+        }else{
+           bubblefly=false;
+        }
+    }
+
+    //powerball app
 	var whiteballArr=[];
 	for(var i=0;i<69;i++){
 	   var tmp={num:(i+1)}
@@ -15,13 +69,15 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
 	$scope.whiteball4=whiteballArr;
 	$scope.whiteball5=whiteballArr;
 
+    //function to filter out the opposite 
 	$scope.not=function(actual,expected){
         if(actual!=expected){
         	return true;
         }
         return false;
 	};
-
+    
+    //if we random out two same numbers in our balls, try again.
 	function filtersame(arr){
         for(var i=0;i<arr.length;i++){
         	for(var j=i+1;j<arr.length;j++){
@@ -33,6 +89,7 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         return false;
 	}
     
+    //if we use selection to pick specific number, we will not random that number box again.
     var selector1dirty=false;
     var selector2dirty=false;
     var selector3dirty=false;
@@ -54,7 +111,8 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
     $scope.selector5dirty=function(){
         selector5dirty=true;
     }
-
+    
+    //random pick all the ball numbers
 	$scope.randompick=function(){
 			do{
                 if(!selector1dirty){
@@ -98,57 +156,9 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
             selector5dirty=false;
 	};
     
-    $scope.lotteryswitch1=true;
-    $scope.lotteryswitch2=false;
 
-    $scope.blackjackswitch1=true;
-    $scope.blackjackswitch2=false;
-
-    $scope.rouletteswitch1=true;
-    $scope.rouletteswitch2=false;
-
-    $scope.eyetrainingswitch1=true;
-    $scope.eyetrainingswitch2=false;
-
-    $scope.typingswitch1=true;
-    $scope.typingswitch2=false;
-
-    $scope.showlotteryboard=function(value){
-        $scope.lotteryswitch1=value;
-        $scope.lotteryswitch2=!value;
-    }
-
-    $scope.switchblackjack=function(value){
-        $scope.blackjackswitch1=value;
-        $scope.blackjackswitch2=!value;
-    }
-
-    $scope.switchroulette=function(value){
-        $scope.rouletteswitch1=value;
-        $scope.rouletteswitch2=!value;
-        round=0;
-        document.getElementById('roulette').style.transition="ease-out 0s";
-        document.getElementById('roulette').style.transform="rotate("+round+"deg)";
-        $scope.decision="";
-    }
-
-    $scope.switcheyetraining=function(value){
-        $scope.eyetrainingswitch1=value;
-        $scope.eyetrainingswitch2=!value;
-    }
-    
-    var bubblefly=false;
-
-    $scope.switchtyping=function(value){
-        $scope.typingswitch1=value;
-        $scope.typingswitch2=!value;
-        if($scope.typingswitch2){
-           bubblefly=true;
-        }else{
-           bubblefly=false;
-        }
-    }
-
+    //blackjack app
+    //generate an array to store 52 cards(except two jokers)
     var cardArr=[];
     for(var i=1,j=1,k=0;i<53;i++){
     	var tmp={num:j,src:"assets/images/src/producer/cards/"+i+".jpg"};
@@ -163,7 +173,12 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
     	}
     	cardArr.push(tmp);
     }
-
+    
+    //initiate the game,enemycardshow is ai's cards object,mycardshow is player's cards object.
+    /*game process is going by reference getcardsclick. enemyhasAce and myhasAce is to detect
+    whether there is an A in cards because A could be counted as 11 in some situations.
+    */
+    //enemyAI is that let ai decide if he will continue to get card.
     var getcardsclick=1; 
     var enemycard1show={};
     var enemycard2show={};
@@ -371,6 +386,7 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
 		}
 	};
     
+    //calculate both ai and player's sum of cards
     var sumofarr1=0;
     var sumofarr2=0;
 
@@ -401,7 +417,8 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         	return true;
         }
     }
-
+    
+    //different card numbers cases
     function game(){
     	if(getcardsclick==2){
     		var tmp1=[enemycard1show.num];
@@ -434,7 +451,8 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         	$scope.gameresult_lose=!$scope.gameresult_win;
         };
     }
-
+    
+    //show the final result
 	$scope.showresult=function(){
         if(!resultOn){
     		$scope.enemycard1={num:enemycard1show.num,src:enemycard1show.src};
@@ -448,7 +466,7 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         console.log(sumofarr1+" "+sumofarr2);
 	};
     
-    
+    //reset game
 	$scope.resetgame=function(){
 		resultOn=false;
         enemyhasAce=false;
@@ -480,17 +498,22 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         $scope.gameresult_lose=false;
         $scope.gameresult_win=false;
 	};
-
+    
+    //roulette app
+    //round is the degree that will rotate.
     var round=0;
 
     $scope.playroulette=function(){
+        /*timer is that to record the timeout function start point, 
+        and previous timesout function will be cancelled if click again.*/
         var timer=0;
         return function(){
                $timeout.cancel(timer);
                round+=1080+Math.ceil(Math.random()*360);
                document.getElementById('roulette').style.transition="ease-out 5s";
                document.getElementById('roulette').style.transform="rotate("+round+"deg)";
-                      
+                
+                //judge the degree and final section roulette pointer shows
                 if(round%360<=36){
                     timer=$timeout(function(){
                        $scope.decision="assets/images/src/producer/cooking.png";
@@ -523,7 +546,9 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
                 
         }
     }();
-    
+
+    //evetraining app
+    //like blackjack,initiate the game references
     var eyetraningcard1show={};
     var eyetraningcard2show={};
     var eyetraningcard3show={};
@@ -535,7 +560,8 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
     var movingcard1=document.getElementById('movingcard1');
     var movingcard2=document.getElementById('movingcard2');
     var movingcard3=document.getElementById('movingcard3');
-
+    
+    //randomly pick three cards and set one of them as our target card.
     $scope.eyetraining_getcards=function(){
         do{
             eyetraningcard1number=Math.ceil(Math.random()*52);
@@ -568,9 +594,12 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         movingcard3.style.transition="ease-out 0.3s";
     };
     
+    //only we press ready button can we start move cards.
     var eyetrainingreday=false; 
+    //only after cards moving ends can we pick the card we think it is target card.
     var chooserightcard=false;
-
+    
+    //turn cards back
     $scope.eyetraining_ready=function(){
         $scope.eyetrainingcard1.src="assets/images/src/producer/cards/55.jpg";
         $scope.eyetrainingcard2.src="assets/images/src/producer/cards/55.jpg";
@@ -580,6 +609,7 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
 
     var intervalstart=false; 
 
+    //when click move button, interval function begin work, and delay close using time out function.
     $scope.movingcards=function(){
         if(eyetrainingreday){
             intervalstart=true;
@@ -598,7 +628,9 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
             movingProcessing(moving_objects);
         }
     },1000);
-
+    
+    /*there are three moving card patterns in all,which are swap 1 and 2,
+    1 and 3, 2 and 3*/
     function movingProcessing(way){
         switch(way){
             case 1:
@@ -614,7 +646,8 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
                break;
         }
     };
-
+    
+    //change cards position function
     function swapCards(a,b){
        updateCards();
        if(a==1&&b==2){
@@ -630,9 +663,10 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
             updateArr[2].style.left="400px";
        }
     }
-    
+    //use an update array to restore each round's swap result.
     var updateArr=[];
-
+    
+    //get updated array using tricky method
     function updateCards(){
         var dummyArr=[movingcard1,movingcard2,movingcard3,movingcard1,movingcard2,movingcard3,movingcard1,movingcard2,movingcard3];
         updateArr=[];
@@ -665,7 +699,8 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         console.log(updateArr);
         return updateArr;
     }
-
+    
+    //after moving cards, the different result we pick one of three cards.
     $scope.choosecard1=function(){
         if(chooserightcard){
             movingcard1.style.border="5px solid red";
@@ -716,7 +751,8 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
             }
         }
     }
-
+    
+    //reset game
     $scope.eyetrainingreset=function(){
         eyetraningcard1show={};
         eyetraningcard2show={};
@@ -734,19 +770,23 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         movingcard2.style.border="5px solid white";
         movingcard3.style.border="5px solid white";
     };
-
+    
+    //typing app
     $scope.writeletter=function($event){
        var LetterDiv=document.getElementById('letter_body');
+       //if backspace is pressed, remove the last element
        if($event.which===8){
            var y=LetterDiv.getElementsByClassName("wordstyping");
            if(y.length>=1){
               LetterDiv.removeChild(y[y.length-1]);
            }
        }else{
+           //otherwise,create a new element node and parse values to it.
            var newDiv=document.createElement('div');
            var newImg=document.createElement('img');
            newDiv.setAttribute("style","float:left;width:30px;height:30px");
            newDiv.setAttribute("class","wordstyping");
+           //different alphabets gif according to key input, event.which is ACSII code.
            switch($event.which){
               case 65:
                  newImg.setAttribute("src","assets/images/src/producer/words/A.gif");
@@ -833,7 +873,9 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
            LetterDiv.appendChild(newDiv);
        }
     }
-
+    
+    /*generate a nice bubble every second, and when onmouseover the bubble,bubble element
+    will be removed and create new elements such as feathers,hearts and stars*/
     $interval(function(){
        if(bubblefly){
            var bubblerandomleft=Math.ceil(Math.random()*1200);
@@ -913,7 +955,8 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
               BubbleDiv.appendChild(newBubblestar3);
               
               var falltime=0;
-
+              
+              //if onmouseover bubble in the lower part of screen, make it fall faster
               if(currentY<500){
                   falltime=7100;
                   newBubblefeather1.style.transition="ease-in 7s";
