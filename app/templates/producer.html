@@ -81,4 +81,13 @@
                 <button id="quiteyetrainingbtn" class="btn btn-success" ng-click="switcheyetraining(true)">Quit Game</button>
             </div>
         </div>
+        
+        <div id="typing_gif" ng-show="typingswitch1"><img src="assets/images/src/producer/typing.gif" ng-click="switchtyping(false)"/> 
+        </div>
+        <div id="letter_board"  style="background:url(assets/images/src/producer/letter.jpg) no-repeat center" ng-show="typingswitch2">
+            <div id="letter_body"></div>
+            <div id="inputbeauty_image"><img src="assets/images/src/producer/ashiato.gif" style="width:100%"/></div>
+            <button id="quittypingbtn" class="btn btn-success" ng-click="switchtyping(true)">Quit</button>
+            <div id="letter_input" class="form-group"><input class="form-control" type="text" name="name" placeholder="Input some words here" ng-keydown="writeletter($event)"></div>
+        </div>
 </div>

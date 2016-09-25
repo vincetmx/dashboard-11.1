@@ -110,6 +110,9 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
     $scope.eyetrainingswitch1=true;
     $scope.eyetrainingswitch2=false;
 
+    $scope.typingswitch1=true;
+    $scope.typingswitch2=false;
+
     $scope.showlotteryboard=function(value){
         $scope.lotteryswitch1=value;
         $scope.lotteryswitch2=!value;
@@ -132,6 +135,11 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
     $scope.switcheyetraining=function(value){
         $scope.eyetrainingswitch1=value;
         $scope.eyetrainingswitch2=!value;
+    }
+
+    $scope.switchtyping=function(value){
+        $scope.typingswitch1=value;
+        $scope.typingswitch2=!value;
     }
 
     var cardArr=[];
@@ -719,4 +727,103 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         movingcard2.style.border="5px solid white";
         movingcard3.style.border="5px solid white";
     };
+
+    $scope.writeletter=function($event){
+       var LetterDiv=document.getElementById('letter_body');
+       if($event.which===8){
+           var y=LetterDiv.getElementsByClassName("wordstyping");
+           if(y.length>=1){
+              LetterDiv.removeChild(y[y.length-1]);
+           }
+       }else{
+           var newDiv=document.createElement('div');
+           var newImg=document.createElement('img');
+           newDiv.setAttribute("style","float:left;width:30px;height:30px");
+           newDiv.setAttribute("class","wordstyping");
+           switch($event.which){
+              case 65:
+                 newImg.setAttribute("src","assets/images/src/producer/words/A.gif");
+                 break;
+              case 66:
+                 newImg.setAttribute("src","assets/images/src/producer/words/B.gif");
+                 break;
+              case 67:
+                 newImg.setAttribute("src","assets/images/src/producer/words/C.gif");
+                 break;
+              case 68:
+                 newImg.setAttribute("src","assets/images/src/producer/words/D.gif");
+                 break;
+              case 69:
+                 newImg.setAttribute("src","assets/images/src/producer/words/E.gif");
+                 break;
+              case 70:
+                 newImg.setAttribute("src","assets/images/src/producer/words/F.gif");
+                 break;
+              case 71:
+                 newImg.setAttribute("src","assets/images/src/producer/words/G.gif");
+                 break;
+              case 72:
+                 newImg.setAttribute("src","assets/images/src/producer/words/H.gif");
+                 break;
+              case 73:
+                 newImg.setAttribute("src","assets/images/src/producer/words/I.gif");
+                 break;
+              case 74:
+                 newImg.setAttribute("src","assets/images/src/producer/words/J.gif");
+                 break;
+              case 75:
+                 newImg.setAttribute("src","assets/images/src/producer/words/K.gif");
+                 break;
+              case 76:
+                 newImg.setAttribute("src","assets/images/src/producer/words/L.gif");
+                 break;
+              case 77:
+                 newImg.setAttribute("src","assets/images/src/producer/words/M.gif");
+                 break;
+              case 78:
+                 newImg.setAttribute("src","assets/images/src/producer/words/N.gif");
+                 break;
+              case 79:
+                 newImg.setAttribute("src","assets/images/src/producer/words/O.gif");
+                 break;
+              case 80:
+                 newImg.setAttribute("src","assets/images/src/producer/words/P.gif");
+                 break;
+              case 81:
+                 newImg.setAttribute("src","assets/images/src/producer/words/Q.gif");
+                 break;
+              case 82:
+                 newImg.setAttribute("src","assets/images/src/producer/words/R.gif");
+                 break;
+              case 83:
+                 newImg.setAttribute("src","assets/images/src/producer/words/S.gif");
+                 break;
+              case 84:
+                 newImg.setAttribute("src","assets/images/src/producer/words/T.gif");
+                 break;
+              case 85:
+                 newImg.setAttribute("src","assets/images/src/producer/words/U.gif");
+                 break;
+              case 86:
+                 newImg.setAttribute("src","assets/images/src/producer/words/V.gif");
+                 break;
+              case 87:
+                 newImg.setAttribute("src","assets/images/src/producer/words/W.gif");
+                 break;
+              case 88:
+                 newImg.setAttribute("src","assets/images/src/producer/words/X.gif");
+                 break;
+              case 89:
+                 newImg.setAttribute("src","assets/images/src/producer/words/Y.gif");
+                 break;
+              case 90:
+                 newImg.setAttribute("src","assets/images/src/producer/words/Z.gif");
+                 break;
+              default:
+                 break;
+           }
+           newDiv.appendChild(newImg);
+           LetterDiv.appendChild(newDiv);
+       }
+    }
 })
