@@ -84,7 +84,8 @@
         
         <div id="typing_gif" ng-show="typingswitch1"><img src="assets/images/src/producer/typing.gif" ng-click="switchtyping(false)"/> 
         </div>
-        <div id="letter_board"  style="background:url(assets/images/src/producer/letter.jpg) no-repeat center" ng-show="typingswitch2">
+        <div id="letter_board" style="background:url(assets/images/src/producer/letter.jpg) no-repeat center" ng-show="typingswitch2">
+            <div id="bubble_dummylayer"><div id="bubble_layer"></div></div>
             <div id="letter_body"></div>
             <div id="inputbeauty_image"><img src="assets/images/src/producer/ashiato.gif" style="width:100%"/></div>
             <button id="quittypingbtn" class="btn btn-success" ng-click="switchtyping(true)">Quit</button>

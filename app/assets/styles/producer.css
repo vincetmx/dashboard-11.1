@@ -305,6 +305,17 @@
 	position: relative;
 }
 
+#bubble_dummylayer{
+	position: absolute;
+	z-index:100;
+}
+
+#bubble_layer{
+	position: relative;
+	width:1400px;
+	height:700px;
+}
+
 #letter_body{
 	position: absolute;
 	width:800px;
