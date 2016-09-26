@@ -92,9 +92,12 @@
             <div id="letter_input" class="form-group"><input class="form-control" type="text" name="name" placeholder="Input some words here" ng-keydown="writeletter($event)"></div>
         </div>
         
-        <div id="bombgame_gif" ng-show="bombswitch1"><img src="assets/images/src/producer/typing.gif" ng-click="switchbombgame(false)"/> 
+        <div id="bombgame_gif" ng-show="bombgameswitch1"><img src="assets/images/src/producer/bombgame.gif" ng-click="switchbombgame(false)"/> 
         </div>
-        <div id="bombgame_board" ng-show="bombswitch2">
-            <button id="quitbomgamebtn" class="btn btn-success" ng-click="switchtyping(true)">Quit Game</button>
+        <div id="bombgame_board" ng-show="bombgameswitch2">
+            <div id="bombplate"></div>
+            <button id="bombgamestartbtn" class="btn btn-info" ng-click="bombgamestart()">Start Game</button>
+            <button id="quitbomgamebtn" class="btn btn-success" ng-click="switchbombgame(true)">Quit Game</button>
+            <div id="bombgameover" ng-show="bombgameover">Game Over</div>>
         </div>
 </div>
