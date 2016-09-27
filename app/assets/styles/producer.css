@@ -430,6 +430,15 @@
 	z-index:0; 
 }
 
+#nobita{
+	position:absolute;
+	width:80px;
+	height:122px;
+	left:200px;
+	top:350px;
+	z-index:0; 
+}
+
 #dialogwindow{
    position:absolute;
    width:300px;
@@ -479,6 +488,10 @@
 	top:200px;
 }
 
+#sodarseller:hover{
+    cursor:pointer;
+}
+
 #lamp{
 	position:absolute;
 	width:60px;
@@ -515,12 +528,24 @@
 	z-index:0;
 }
 
+#sugar{
+	position:absolute;
+	width:32px;
+	height:33px;
+	left:650px;
+	top:260px;
+}
+
 #up_panel{
 	position:absolute;
 	width:59px;
 	height:57px;
 	left:1000px;
 	bottom:150px;
+}
+
+#up_panel:hover{
+    cursor:pointer;
 }
 
 #down_panel{
@@ -531,12 +556,20 @@
 	bottom:85px;
 }
 
+#down_panel:hover{
+    cursor:pointer;
+}
+
 #left_panel{
 	position:absolute;
 	width:59px;
 	height:57px;
 	left:930px;
 	bottom:85px;
+}
+
+#left_panel:hover{
+    cursor:pointer;
 }
 
 #right_panel{
@@ -547,6 +580,10 @@
 	bottom:85px;
 }
 
+#right_panel:hover{
+    cursor:pointer;
+}
+
 #A_panel{
 	position:absolute;
 	width:59px;
@@ -555,10 +592,18 @@
 	bottom:85px;
 }
 
+#A_panel:hover{
+    cursor:pointer;
+}
+
 #B_panel{
 	position:absolute;
 	width:59px;
 	height:57px;
 	left:1270px;
 	bottom:85px;
+}
+
+#B_panel:hover{
+    cursor:pointer;
 }
