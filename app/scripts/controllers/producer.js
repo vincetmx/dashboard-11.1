@@ -22,6 +22,9 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
     $scope.bombgameswitch1=true;
     $scope.bombgameswitch2=false;
 
+    $scope.doraemongameswitch1=true;
+    $scope.doraemongameswitch2=false;
+
     $scope.showlotteryboard=function(value){
         $scope.lotteryswitch1=value;
         $scope.lotteryswitch2=!value;
@@ -69,6 +72,18 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
            initializebomb();
            BombPlateNotCreated=false;
         }
+    }
+
+    $scope.switchdoraemongame=function(value){
+        $scope.doraemongameswitch1=value;
+        $scope.doraemongameswitch2=!value;
+        $scope.getcabbage=false;
+        $scope.showdialogwindow=false;
+        $scope.showdialogwindow2=false;
+        doraemon.style.left="600px";
+        doraemon.style.top="270px";
+        cabbage.style.left="790px";
+        cabbage.style.top="280px";
     }
 
     //powerball app
@@ -1026,7 +1041,8 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
     var BombPlate=document.getElementById('bombplate');
     var updateBombArr=[];
     var bombs=document.getElementsByClassName('bomb');
-
+    
+    //create grids of bombs
     function createGrids(){
         for(var v=0;v<100;v++){
             (function(v){
@@ -1046,6 +1062,8 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         }
     }
 
+    /*set each bomb grid its property,when click on that bomb,the bomb will be divided to two bombs
+    or one bomb and one apple*/
     function initializebomb(){
         for(var d=0;d<100;d++){
            bombs[d].onclick=function(){
@@ -1058,7 +1076,7 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
                 devidedbomb1.setAttribute("class","bombactive");
                 devidedbomb1.setAttribute("style","width:76px;height:76px;border-radius:76px;color:white;font-size:30px;text-align:center;padding-top:18px;background:url(assets/images/src/producer/bomb.png);");
                 var randomtime1=8+Math.ceil(Math.random()*10);
-                bombtime(randomtime1,devidedbomb1);
+                bombtimer(randomtime1,devidedbomb1);
 
                 do{ 
                    var devidedbomb2Num=Math.ceil(Math.random()*(updateBombArr.length))
@@ -1074,7 +1092,7 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
                 devidedbomb2.setAttribute("timer","on");
                 devidedbomb2.setAttribute("class","bombactive");
                 var randomtime2=8+Math.ceil(Math.random()*10);
-                bombtime(randomtime2,devidedbomb2);
+                bombtimer(randomtime2,devidedbomb2);
                 
                 updatebomb();
                 console.log(updateBombArr);
@@ -1086,7 +1104,8 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
            }
         }
     }
-
+    
+    //click to start the game, randomly pick a grid of bomb.
     $scope.bombgamestart=function(){
        $scope.bombgameover=false;
        var randomtime=8+Math.ceil(Math.random()*10);
@@ -1096,16 +1115,17 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
        startbomb.setAttribute("timer","on");
        startbomb.setAttribute("class","bombactive");
        startbomb.setAttribute("style","width:76px;height:76px;border-radius:76px;color:white;font-size:30px;text-align:center;padding-top:18px;background:url(assets/images/src/producer/bomb.png);");
-       bombtime(randomtime,startbomb);
+       bombtimer(randomtime,startbomb);
     }
 
-    var bombtimer=0;
-
-    function bombtime(time,bomb){
+    var bombcountTimer=0;
+    
+    //each bomb will be given a timer
+    function bombtimer(time,bomb){
        bomb.innerText=time+"";
        for(var t=0;t<=time;t++){
          (function(t){
-           bombtimer=$timeout(function(){
+           bombcountTimer=$timeout(function(){
              if(time-t===0){
                 bomb.innerText="";
                 bomb.setAttribute("style","color:green;");
@@ -1121,7 +1141,8 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
          }(t));
        }
     }
-
+    
+    //before each click, to check how many grids are in the condition of no bombs
     function updatebomb(){
         updateBombArr=[];
         for(var c=0;c<100;c++){
@@ -1131,13 +1152,313 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         }
         return updateBombArr;
     }
-
+    
+    //bomb game over
     function bombgameover(){
         for(var e=0;e<100;e++){
             bombs[e].firstChild.setAttribute("kind","");
             bombs[e].firstChild.setAttribute("class","nobomb");
             bombs[e].firstChild.setAttribute("style","color:green");
             bombs[e].firstChild.innerText="";
+        }
+    }
+
+    //doraemon game app
+    var doraemon=document.getElementById('doraemon');
+    var cabbage=document.getElementById('cabbage');
+
+    $scope.doraemongamestart=function(){
+        doraemon.style.left="600px";
+        doraemon.style.top="270px";
+        cabbage.style.left="790px";
+        cabbage.style.top="280px";
+        cabbage.style.transition="ease-out 1s";
+    }
+
+    var downMovingtimer=0;
+    var upMovingtimer=0;
+    var leftMovingtimer=0;
+    var rightMovingtimer=0;
+
+    var downMovingStep=false;
+    var upMovingStep=false;
+    var leftMovingStep=false;
+    var rightMovingStep=false;
+    var doraemon_direction="";
+
+    $scope.downMoving=function(){
+        $timeout.cancel(downMovingtimer);
+        doraemon_direction="down";
+        downMovingStep=!downMovingStep;
+        var tmp=doraemon.style.top;
+        var currentY=parseInt(tmp.substring(0,tmp.length-2));
+
+        if(currentY<=655){
+           if(downMovingStep){
+                doraemon.style.background="url(assets/images/src/producer/doraemon/down2.png) no-repeat center";
+            }else{
+                doraemon.style.background="url(assets/images/src/producer/doraemon/down3.png) no-repeat center";
+            }
+            doraemon.style.transition="ease-in 0.3s";
+            doraemon.style.top=currentY+15+"px";
+            if(carryCabbage){
+                var tmp2=cabbage.style.top;
+                cabbage.style.transition="ease-in 0.3s";
+                var currentY2=parseInt(tmp2.substring(0,tmp2.length-2));
+                cabbage.style.top=currentY2+15+"px";
+            }
+
+
+            downMovingtimer=$timeout(function(){
+                doraemon.style.transition="ease-out 0.3s";
+                tmp=doraemon.style.top;
+                currentY=parseInt(tmp.substring(0,tmp.length-2));
+                doraemon.style.background="url(assets/images/src/producer/doraemon/down1.png) no-repeat center";
+                doraemon.style.top=currentY+15+"px";
+                if(currentY>=460){
+                   doraemon.style.zIndex=15;
+                   cabbage.style.zIndex=15;
+                }
+                if(carryCabbage){
+                    tmp2=cabbage.style.top;
+                    cabbage.style.transition="ease-out 0.3s";
+                    currentY2=parseInt(tmp2.substring(0,tmp2.length-2));
+                    cabbage.style.top=currentY2+15+"px";
+                }else{
+                    judgeZindex();
+                }
+                console.log("top: "+doraemon.style.top);
+            },350);
+        }
+    }
+
+    $scope.upMoving=function(){
+        $timeout.cancel(upMovingtimer);
+        doraemon_direction="up";
+        upMovingStep=!upMovingStep;
+        var tmp=doraemon.style.top;
+        var currentY=parseInt(tmp.substring(0,tmp.length-2));
+
+        if(upMovingStep){
+            doraemon.style.background="url(assets/images/src/producer/doraemon/up2.png) no-repeat center";
+        }else{
+            doraemon.style.background="url(assets/images/src/producer/doraemon/up3.png) no-repeat center";
+        }
+        doraemon.style.transition="ease-in 0.3s";
+        if(currentY>=300){
+            doraemon.style.top=currentY-15+"px";
+
+            if(carryCabbage){
+                var tmp2=cabbage.style.top;
+                cabbage.style.transition="ease-in 0.3s";
+                var currentY2=parseInt(tmp2.substring(0,tmp2.length-2));
+                cabbage.style.top=currentY2-15+"px";
+            }
+        }
+
+        upMovingtimer=$timeout(function(){
+            doraemon.style.transition="ease-out 0.3s";
+            tmp=doraemon.style.top;
+            currentY=parseInt(tmp.substring(0,tmp.length-2));
+            doraemon.style.background="url(assets/images/src/producer/doraemon/up1.png) no-repeat center";
+            if(currentY>=320){
+                doraemon.style.top=currentY-15+"px";
+                if(carryCabbage){
+                    var tmp2=cabbage.style.top;
+                    cabbage.style.transition="ease-in 0.3s";
+                    var currentY2=parseInt(tmp2.substring(0,tmp2.length-2));
+                    cabbage.style.top=currentY2-15+"px";
+                }else{
+                    judgeZindex();
+                }
+            }
+            console.log("top: "+doraemon.style.top);
+        },300);
+    }
+
+    $scope.leftMoving=function(){
+        $timeout.cancel(leftMovingtimer);
+        doraemon_direction="left";
+        leftMovingStep=!leftMovingStep;
+        var tmp=doraemon.style.left;
+        var currentX=parseInt(tmp.substring(0,tmp.length-2));
+
+        if(currentX>=30){
+            if(leftMovingStep){
+                doraemon.style.background="url(assets/images/src/producer/doraemon/left2.png) no-repeat center";
+            }else{
+                doraemon.style.background="url(assets/images/src/producer/doraemon/left3.png) no-repeat center";
+            }
+            doraemon.style.transition="ease-in 0.3s";
+            doraemon.style.left=currentX-15+"px";
+
+            if(carryCabbage){
+                var tmp2=cabbage.style.left;
+                cabbage.style.transition="ease-in 0.3s";
+                var currentX2=parseInt(tmp2.substring(0,tmp2.length-2));
+                cabbage.style.left=currentX2-15+"px";
+            }
+
+            leftMovingtimer=$timeout(function(){
+                doraemon.style.transition="ease-out 0.3s";
+                tmp=doraemon.style.left;
+                currentX=parseInt(tmp.substring(0,tmp.length-2));
+                doraemon.style.background="url(assets/images/src/producer/doraemon/left1.png) no-repeat center";
+                doraemon.style.left=currentX-15+"px";
+
+                if(carryCabbage){
+                    tmp2=cabbage.style.left;
+                    cabbage.style.transition="ease-in 0.3s";
+                    currentX2=parseInt(tmp2.substring(0,tmp2.length-2));
+                    cabbage.style.left=currentX2-15+"px";
+                }
+                console.log("left: "+doraemon.style.left);
+            },350);
+        }
+    }
+
+    $scope.rightMoving=function(){
+        $timeout.cancel(rightMovingtimer);
+        doraemon_direction="right";
+        rightMovingStep=!rightMovingStep;
+        var tmp=doraemon.style.left;
+        var currentX=parseInt(tmp.substring(0,tmp.length-2));
+
+        if(currentX<=1270){
+            if(rightMovingStep){
+                doraemon.style.background="url(assets/images/src/producer/doraemon/right2.png) no-repeat center";
+            }else{
+                doraemon.style.background="url(assets/images/src/producer/doraemon/right3.png) no-repeat center";
+            }
+            doraemon.style.transition="ease-in 0.3s";
+            doraemon.style.left=currentX+15+"px";
+            if(carryCabbage){
+                var tmp2=cabbage.style.left;
+                cabbage.style.transition="ease-in 0.3s";
+                var currentX2=parseInt(tmp2.substring(0,tmp2.length-2));
+                cabbage.style.left=currentX2+15+"px";
+            }
+
+            rightMovingtimer=$timeout(function(){
+                doraemon.style.transition="ease-out 0.3s";
+                tmp=doraemon.style.left;
+                currentX=parseInt(tmp.substring(0,tmp.length-2));
+                doraemon.style.background="url(assets/images/src/producer/doraemon/right1.png) no-repeat center";
+                doraemon.style.left=currentX+15+"px";
+                if(carryCabbage){
+                    tmp2=cabbage.style.left;
+                    cabbage.style.transition="ease-in 0.3s";
+                    currentX2=parseInt(tmp2.substring(0,tmp2.length-2));
+                    cabbage.style.left=currentX2+15+"px";
+                }
+                console.log("left: "+doraemon.style.left);
+            },350);
+        }
+    }
+    
+    var buycabbageOn=false;
+    var carryCabbage=false;
+
+    $scope.buycabbage=function(){
+        var tmp1=doraemon.style.left;
+        var tmp2=doraemon.style.top;
+        var currentX=parseInt(tmp1.substring(0,tmp1.length-2));
+        var currentY=parseInt(tmp2.substring(0,tmp2.length-2));
+        console.log(currentX);
+        console.log(currentY);
+
+        if(currentX>680&&currentX<790&&currentY<310){
+            gamedialog();
+        }
+        console.log($scope.showdialogwindow);
+    }
+    
+    $scope.selectdialog=function(value){
+        $scope.showdialogwindow=false;
+        $scope.showdialogwindow2=false;
+        buycabbageOn=value;
+        if(buycabbageOn){
+            $scope.getcabbage=true;
+            $timeout(function(){
+               cabbage.style.left="830px";
+               cabbage.style.top="330px";
+            },300);
+        }
+    }
+
+    $scope.takecabbage=function(){
+        if($scope.getcabbage){
+            var tmp1=doraemon.style.left;
+            var tmp2=doraemon.style.top;
+            var currentX1=parseInt(tmp1.substring(0,tmp1.length-2));
+            var currentY1=parseInt(tmp2.substring(0,tmp2.length-2));
+
+            var tmp3=cabbage.style.left;
+            var tmp4=cabbage.style.top;
+            var currentX2=parseInt(tmp3.substring(0,tmp3.length-2));
+            var currentY2=parseInt(tmp4.substring(0,tmp4.length-2));
+
+            if(currentX1>=(currentX2-90)&&currentX1<=(currentX2+90)&&currentY1>=(currentY2-90)&&currentY1<=(currentY2+90)){
+                cabbage.style.transition="ease-in 0.3s";
+                cabbage.style.left=currentX1+"px";
+                cabbage.style.top=currentY1-15+"px";
+                carryCabbage=true;
+                doraemon.style.zIndex=1;
+                cabbage.style.zIndex=1;
+            }
+        }     
+    }
+
+    $scope.putcabbage=function(){
+        if(carryCabbage){
+            var tmp1=doraemon.style.left;
+            var tmp2=doraemon.style.top;
+            var currentX1=parseInt(tmp1.substring(0,tmp1.length-2));
+            var currentY1=parseInt(tmp2.substring(0,tmp2.length-2));
+
+            var tmp3=cabbage.style.left;
+            var tmp4=cabbage.style.top;
+            var currentX2=parseInt(tmp3.substring(0,tmp3.length-2));
+            var currentY2=parseInt(tmp4.substring(0,tmp4.length-2));
+
+            if(doraemon_direction=="right"){
+                cabbage.style.left=currentX1+30+"px";
+                cabbage.style.top=currentY1+50+"px";
+            }else if(doraemon_direction=="left"){
+                cabbage.style.left=currentX1-30+"px";
+                cabbage.style.top=currentY1+50+"px";
+            }else if(doraemon_direction=="down"){
+                cabbage.style.left=currentX1-5+"px";
+                cabbage.style.top=currentY1+60+"px";
+            }else if(doraemon_direction=="up"){
+                cabbage.style.left=currentX1-30+"px";
+                cabbage.style.top=currentY1+50+"px";
+            }
+            carryCabbage=false;
+        }
+    }
+
+    function gamedialog(){
+        if($scope.getcabbage){
+           $scope.showdialogwindow2=true;
+        }else{
+           $scope.showdialogwindow=true;
+        }
+    }
+
+    function judgeZindex(){
+        var tmp1=doraemon.style.top;
+        var currentY1=parseInt(tmp1.substring(0,tmp1.length-2));
+
+        var tmp2=cabbage.style.top;
+        var currentY2=parseInt(tmp2.substring(0,tmp2.length-2));
+
+        if(currentY1>currentY2-60){
+            doraemon.style.zIndex=2;
+            cabbage.style.zIndex=1;
+        }else{
+            doraemon.style.zIndex=1;
+            cabbage.style.zIndex=2;
         }
     }
 })

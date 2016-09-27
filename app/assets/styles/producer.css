@@ -359,6 +359,10 @@
 	height:980px;
 }
 
+#bombgame_gif:hover{
+   cursor:pointer;
+}
+
 #bombplate{
 	position:absolute;
 	width:804px;
@@ -386,4 +390,175 @@
 	color:red;
 	left:500px;
 	top:350px;
+}
+
+#doraemongame_board{
+	width:1400px;
+	height:800px;
+	border-radius:8px;
+	border:2px solid gray;
+	position:relative;
+}
+
+#doraemongame_gif{
+	width:1400px;
+	height:800px;
+}
+
+#doraemongame_gif:hover{
+   cursor:pointer;
+}
+
+#doraemongamestartbtn{
+   	position:absolute;
+	left:550px;
+	bottom:30px;
+}
+
+#quitdoraemongamebtn{
+	position:absolute;
+	left:700px;
+	bottom:30px;
+}
+
+#doraemon{
+	position:absolute;
+	width:70px;
+	height:90px;
+	left:600px;
+	top:270px;
+	z-index:0; 
+}
+
+#dialogwindow{
+   position:absolute;
+   width:300px;
+   height:200px;
+   left:400px;
+   top:200px;
+   z-index:5;
+}
+
+#dialog_content{
+   position:absolute;
+   width:500px;
+   height:200px;
+   left:420px;
+   top:210px;
+   font-size:30px;
+   color:white;
+   z-index:5; 
+}
+
+#dialog_content ul{
+   list-style: none;
+}
+
+#dialog_content ul li:hover{
+   width:300px;
+   background:#9adaf6;	
+   opacity:0.7;
+}
+
+#dialog_content2{
+   position:absolute;
+   width:500px;
+   height:200px;
+   left:420px;
+   top:210px;
+   font-size:30px;
+   color:white;
+   z-index:5;
+}
+
+#sodarseller{
+	position:absolute;
+	width:85px;
+	height:125px;
+	left:742px;
+	top:200px;
+}
+
+#lamp{
+	position:absolute;
+	width:60px;
+	height:120px;
+	left:300px;
+	top:450px;
+	z-index:10;
+}
+
+#stopsign{
+	position:absolute;
+	width:56px;
+	height:102px;
+	left:700px;
+	top:450px;
+	z-index:10;
+}
+
+#onewaysign{
+	position:absolute;
+	width:48px;
+	height:106px;
+	left:1000px;
+	top:450px;
+	z-index:10;
+}
+
+#cabbage{
+	position:absolute;
+	width:50px;
+	height:38px;
+	left:790px;
+	top:280px;
+	z-index:0;
+}
+
+#up_panel{
+	position:absolute;
+	width:59px;
+	height:57px;
+	left:1000px;
+	bottom:150px;
+}
+
+#down_panel{
+	position:absolute;
+	width:59px;
+	height:57px;
+	left:1000px;
+	bottom:85px;
+}
+
+#left_panel{
+	position:absolute;
+	width:59px;
+	height:57px;
+	left:930px;
+	bottom:85px;
+}
+
+#right_panel{
+	position:absolute;
+	width:59px;
+	height:57px;
+	left:1070px;
+	bottom:85px;
+}
+
+#A_panel{
+	position:absolute;
+	width:59px;
+	height:57px;
+	left:1200px;
+	bottom:85px;
+}
+
+#B_panel{
+	position:absolute;
+	width:59px;
+	height:57px;
+	left:1270px;
+	bottom:85px;
 }
