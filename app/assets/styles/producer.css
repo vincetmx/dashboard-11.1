@@ -436,7 +436,7 @@
    height:200px;
    left:400px;
    top:200px;
-   z-index:5;
+   z-index:20;
 }
 
 #dialog_content{
@@ -447,7 +447,7 @@
    top:210px;
    font-size:30px;
    color:white;
-   z-index:5; 
+   z-index:20; 
 }
 
 #dialog_content ul{
@@ -468,7 +468,7 @@
    top:210px;
    font-size:30px;
    color:white;
-   z-index:5;
+   z-index:20;
 }
 
 #sodarseller{
@@ -485,7 +485,7 @@
 	height:120px;
 	left:300px;
 	top:450px;
-	z-index:10;
+	z-index:15;
 }
 
 #stopsign{
@@ -494,7 +494,7 @@
 	height:102px;
 	left:700px;
 	top:450px;
-	z-index:10;
+	z-index:15;
 }
 
 #onewaysign{
@@ -503,7 +503,7 @@
 	height:106px;
 	left:1000px;
 	top:450px;
-	z-index:10;
+	z-index:15;
 }
 
 #cabbage{

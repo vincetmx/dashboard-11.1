@@ -1215,19 +1215,14 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
                 currentY=parseInt(tmp.substring(0,tmp.length-2));
                 doraemon.style.background="url(assets/images/src/producer/doraemon/down1.png) no-repeat center";
                 doraemon.style.top=currentY+15+"px";
-                if(currentY>=460){
-                   doraemon.style.zIndex=15;
-                   cabbage.style.zIndex=15;
-                }
                 if(carryCabbage){
                     tmp2=cabbage.style.top;
                     cabbage.style.transition="ease-out 0.3s";
                     currentY2=parseInt(tmp2.substring(0,tmp2.length-2));
                     cabbage.style.top=currentY2+15+"px";
-                }else{
-                    judgeZindex();
                 }
-                console.log("top: "+doraemon.style.top);
+                judgeZindex();
+                console.log("top: "+doraemon.style.top+"zIndex "+doraemon.style.zIndex);
             },350);
         }
     }
@@ -1268,11 +1263,10 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
                     cabbage.style.transition="ease-in 0.3s";
                     var currentY2=parseInt(tmp2.substring(0,tmp2.length-2));
                     cabbage.style.top=currentY2-15+"px";
-                }else{
-                    judgeZindex();
                 }
+                judgeZindex();
             }
-            console.log("top: "+doraemon.style.top);
+            console.log("top: "+doraemon.style.top+"zIndex "+doraemon.style.zIndex);
         },300);
     }
 
@@ -1403,8 +1397,6 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
                 cabbage.style.left=currentX1+"px";
                 cabbage.style.top=currentY1-15+"px";
                 carryCabbage=true;
-                doraemon.style.zIndex=1;
-                cabbage.style.zIndex=1;
             }
         }     
     }
@@ -1453,12 +1445,29 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         var tmp2=cabbage.style.top;
         var currentY2=parseInt(tmp2.substring(0,tmp2.length-2));
 
-        if(currentY1>currentY2-60){
-            doraemon.style.zIndex=2;
-            cabbage.style.zIndex=1;
+        var currentY3=475;
+        
+        if(carryCabbage){
+            if(currentY1>currentY3){
+                doraemon.style.zIndex=16;
+                cabbage.style.zIndex=16;
+            }else{
+                doraemon.style.zIndex=10;
+                cabbage.style.zIndex=10;
+            }
         }else{
-            doraemon.style.zIndex=1;
-            cabbage.style.zIndex=2;
+            if(currentY1>currentY3){
+                doraemon.style.zIndex=16;
+                cabbage.style.zIndex=10;
+            }else{
+                if(currentY1-60>currentY2){
+                    doraemon.style.zIndex=12;
+                    cabbage.style.zIndex=10;
+                }else{
+                    doraemon.style.zIndex=10;
+                    cabbage.style.zIndex=12;
+                }
+            }
         }
     }
 })
