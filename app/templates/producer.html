@@ -108,7 +108,10 @@
             <div id="nobita" style="background:url(assets/images/src/producer/doraemon/nobita_down1.png) no-repeat center" value="nobita"></div>
             <div id="sodarseller" ng-click="buycabbage()"></div>
             <div id="cabbage" ng-show="getcabbage"><img src="assets/images/src/producer/doraemon/cabbage.png"/></div>
-            <div id="sugar" ng-show="getsugar"><img src="assets/images/src/producer/doraemon/sugar1.png"/></div>
+            <div id="sugar" ng-show="getsugar"><img id="sugarimg" src="assets/images/src/producer/doraemon/sugar1.png"/></div>
+            <div id="bluebutterfly" ng-show="showbutterfly"><img src="assets/images/src/producer/doraemon/bluebtf1.gif"/></div>
+            <div id="greenbuterfly" ng-show="showbutterfly"><img src="assets/images/src/producer/doraemon/greenbtf1.gif"/></div>
+            <div id="eagle" ng-show="showeagle"><img src="assets/images/src/producer/doraemon/bird.gif"/></div>
             <div id="lamp"><img src="assets/images/src/producer/doraemon/lamp.png"/></div>
             <div id="stopsign"><img src="assets/images/src/producer/doraemon/stopsign.png"/></div>
             <div id="onewaysign"><img src="assets/images/src/producer/doraemon/onewaysign.png"/></div>
@@ -120,13 +123,17 @@
                </ul>
             </div>
             <div id="dialog_content2" ng-show="showdialogwindow2" ng-click="selectdialog(false)">Sold Out!Come tomorrow!</div>
+            <div id="switchtime_layer" ng-show="switchtime" style="background:url(assets/images/src/producer/doraemon/switchtime.png)"></div>
+            <div id="afternoon_layer" ng-show="afternoon" style="background:url(assets/images/src/producer/doraemon/afternoon.png)"></div>
+            <div id="night_layer" ng-show="night" style="background:url(assets/images/src/producer/doraemon/night.png)"></div>
             <div id="up_panel" style="background:url(assets/images/src/producer/up_panel.png) no-repeat center" ng-click="charactermoving('up')"></div>
             <div id="down_panel" style="background:url(assets/images/src/producer/down_panel.png) no-repeat center" ng-click="charactermoving('down')"></div>
             <div id="left_panel" style="background:url(assets/images/src/producer/left_panel.png) no-repeat center" ng-click="charactermoving('left')"></div>
             <div id="right_panel" style="background:url(assets/images/src/producer/right_panel.png) no-repeat center" ng-click="charactermoving('right')"></div>
             <div id="A_panel" style="background:url(assets/images/src/producer/A_panel.png) no-repeat center" ng-click="Abutton()"></div>
-            <div id="B_panel" style="background:url(assets/images/src/producer/B_panel.png) no-repeat center" ng-click="putcabbage()"></div>
+            <div id="B_panel" style="background:url(assets/images/src/producer/B_panel.png) no-repeat center" ng-click="Bbutton()"></div>
             <button id="doraemongamestartbtn" class="btn btn-info" ng-click="doraemongamestart()">Start Game</button>
+            <button id="switchtimebtn" class="btn btn-warning" ng-click="switchgametime()">Switch Time</button>
             <button id="quitdoraemongamebtn" class="btn btn-success" ng-click="switchdoraemongame(true)">Quit Game</button>
         </div>
 </div>

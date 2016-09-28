@@ -78,12 +78,24 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         $scope.doraemongameswitch1=value;
         $scope.doraemongameswitch2=!value;
         $scope.getcabbage=false;
+        $scope.getsugar=false;
         $scope.showdialogwindow=false;
         $scope.showdialogwindow2=false;
         doraemon.style.left="600px";
         doraemon.style.top="270px";
         cabbage.style.left="790px";
         cabbage.style.top="280px";
+        sugar.style.left="650px";
+        sugar.style.top="280px";
+        bluebutterfly.style.left="1200px";
+        bluebutterfly.style.top="230px";
+        greenbutterfly.style.left="50px";
+        greenbutterfly.style.top="350px";
+        daytimeOn=true;
+        afternoonOn=false;
+        nightOn=false;
+        $scope.afternoonOn=false;
+        $scope.nightOn=false;
     }
 
     //powerball app
@@ -1168,6 +1180,53 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
     var nobita=document.getElementById('nobita');
     var cabbage=document.getElementById('cabbage');
     var sugar=document.getElementById('sugar');
+    var bluebutterfly=document.getElementById('bluebutterfly');
+    var greenbutterfly=document.getElementById('greenbuterfly');
+    var eagle=document.getElementById('eagle');
+
+    $scope.switchtime=false;
+    $scope.afternoon=false;
+    $scope.night=false;
+    $scope.showbutterfly=true;
+    $scope.showeagle=false;
+
+    var daytimeOn=true;
+    var afternoonOn=false;
+    var nightOn=false;
+
+    $scope.switchgametime=function(){
+        $scope.switchtime=true;
+        if(daytimeOn){
+            $timeout(function(){
+                $scope.switchtime=false;
+                $scope.afternoon=true;
+                daytimeOn=false;
+                afternoonOn=true;
+                nightOn=false;
+            },1500);
+        }
+        if(afternoonOn){
+            $timeout(function(){
+                $scope.switchtime=false;
+                $scope.afternoon=false;
+                $scope.showbutterfly=false;
+                $scope.night=true;
+                daytimeOn=false;
+                afternoonOn=false;
+                nightOn=true;
+            },1500);
+        }
+        if(nightOn){
+            $timeout(function(){
+                $scope.switchtime=false;
+                $scope.night=false;
+                $scope.showbutterfly=true;
+                daytimeOn=true;
+                afternoonOn=false;
+                nightOn=false;
+            },1500);
+        }
+    }
 
     $scope.doraemongamestart=function(){
         doraemon.style.left="600px";
@@ -1175,11 +1234,19 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         cabbage.style.left="790px";
         cabbage.style.top="280px";
         sugar.style.left="650px";
-        sugar.style.top="260px";
+        sugar.style.top="280px";
         nobita.style.left="200px";
         nobita.style.top="350px";
+        bluebutterfly.style.left="1200px";
+        bluebutterfly.style.top="230px";
+        greenbutterfly.style.left="50px";
+        greenbutterfly.style.top="350px";
+        eagle.style.left="0px";
+        eagle.style.top="0px";
         cabbage.style.transition="ease-out 1s";
         nobitamoving();
+        bluebutterflymoving();
+        greenbutterflymoving();
     }
 
     var downMovingtimer=0;
@@ -1192,6 +1259,12 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
     var leftMovingStep=false;
     var rightMovingStep=false;
     var doraemon_direction="";
+
+    var buycabbageOn=false;
+    var carryItem=false;
+    var carryCabbage=false;
+    var carrySugar=false;
+    var handEmpty=true;
     
     $scope.charactermoving=function(direction){
         switch(direction){
@@ -1210,6 +1283,50 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
             default:
                  break;
         }
+    }
+
+    function bluebutterflymoving(){
+        var randomX=50+Math.ceil(Math.random()*900);
+        var randomY=50+Math.ceil(Math.random()*600);
+        var tmpX=bluebutterfly.style.left;
+        var tmpY=bluebutterfly.style.top;
+        var currentX=parseInt(tmpX.substring(0,tmpX.length-2));
+        var currentY=parseInt(tmpY.substring(0,tmpY.length-2));
+
+        if(Math.abs(currentX-randomX)>600||Math.abs(currentY-randomY)>600){
+            var randomTime=10+Math.ceil(Math.random()*5);
+        }else if(Math.abs(currentX-randomX)<300&&Math.abs(currentY-randomY)<300){
+            var randomTime=3+Math.ceil(Math.random()*4);
+        }else{
+            var randomTime=5+Math.ceil(Math.random()*5);
+        }
+        
+        bluebutterfly.style.transition="ease "+randomTime+"s";
+        bluebutterfly.style.left=randomX+"px";
+        bluebutterfly.style.top=randomY+"px";
+        $timeout(bluebutterflymoving,randomTime*1000+100);
+    }
+
+    function greenbutterflymoving(){
+        var randomX=50+Math.ceil(Math.random()*900);
+        var randomY=50+Math.ceil(Math.random()*600);
+        var tmpX=greenbutterfly.style.left;
+        var tmpY=greenbutterfly.style.top;
+        var currentX=parseInt(tmpX.substring(0,tmpX.length-2));
+        var currentY=parseInt(tmpY.substring(0,tmpY.length-2));
+
+        if(Math.abs(currentX-randomX)>600||Math.abs(currentY-randomY)>600){
+            var randomTime=10+Math.ceil(Math.random()*5);
+        }else if(Math.abs(currentX-randomX)<300&&Math.abs(currentY-randomY)<300){
+            var randomTime=3+Math.ceil(Math.random()*4);
+        }else{
+            var randomTime=5+Math.ceil(Math.random()*5);
+        }
+        
+        greenbutterfly.style.transition="ease "+randomTime+"s";
+        greenbutterfly.style.left=randomX+"px";
+        greenbutterfly.style.top=randomY+"px";
+        $timeout(greenbutterflymoving,randomTime*1000+100);
     }
     
     function nobitamoving(){
@@ -1241,7 +1358,6 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         downMovingStep=!downMovingStep;
         var tmp=charactor.style.top;
         var currentY=parseInt(tmp.substring(0,tmp.length-2));
-        console.log(doraemon.getAttribute('value'));
 
         if(currentY<=655){
            if(downMovingStep){
@@ -1259,10 +1375,12 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
             charactor.style.transition="ease-in 0.3s";
             charactor.style.top=currentY+15+"px";
             if(carryItem&&charactor===doraemon){
-                var tmp2=cabbage.style.top;
-                cabbage.style.transition="ease-in 0.3s";
-                var currentY2=parseInt(tmp2.substring(0,tmp2.length-2));
-                cabbage.style.top=currentY2+15+"px";
+                if(carryCabbage){
+                    itemMoving(cabbage,doraemon_direction);
+                }
+                if(carrySugar){
+                    itemMoving(sugar,doraemon_direction);
+                }
             }
 
 
@@ -1277,10 +1395,12 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
                 }
                 charactor.style.top=currentY+15+"px";
                 if(carryItem&&charactor===doraemon){
-                    tmp2=cabbage.style.top;
-                    cabbage.style.transition="ease-out 0.3s";
-                    currentY2=parseInt(tmp2.substring(0,tmp2.length-2));
-                    cabbage.style.top=currentY2+15+"px";
+                    if(carryCabbage){
+                        itemMoving(cabbage,doraemon_direction);
+                    }
+                    if(carrySugar){
+                        itemMoving(sugar,doraemon_direction);
+                    }
                 }
                 judgeZindex(charactor);
                 // console.log("top: "+charactor.style.top);
@@ -1315,10 +1435,12 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
             charactor.style.top=currentY-15+"px";
 
             if(carryItem&&charactor===doraemon){
-                var tmp2=cabbage.style.top;
-                cabbage.style.transition="ease-in 0.3s";
-                var currentY2=parseInt(tmp2.substring(0,tmp2.length-2));
-                cabbage.style.top=currentY2-15+"px";
+                if(carryCabbage){
+                    itemMoving(cabbage,doraemon_direction);
+                }
+                if(carrySugar){
+                    itemMoving(sugar,doraemon_direction);
+                }
             }
         }
 
@@ -1334,10 +1456,12 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
             if(currentY>=320){
                 charactor.style.top=currentY-15+"px";
                 if(carryItem&&charactor===doraemon){
-                    var tmp2=cabbage.style.top;
-                    cabbage.style.transition="ease-in 0.3s";
-                    var currentY2=parseInt(tmp2.substring(0,tmp2.length-2));
-                    cabbage.style.top=currentY2-15+"px";
+                    if(carryCabbage){
+                        itemMoving(cabbage,doraemon_direction);
+                    }
+                    if(carrySugar){
+                        itemMoving(sugar,doraemon_direction);
+                    }
                 }
                 judgeZindex(charactor);
             }
@@ -1372,10 +1496,12 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
             charactor.style.left=currentX-15+"px";
 
             if(carryItem&&charactor===doraemon){
-                var tmp2=cabbage.style.left;
-                cabbage.style.transition="ease-in 0.3s";
-                var currentX2=parseInt(tmp2.substring(0,tmp2.length-2));
-                cabbage.style.left=currentX2-15+"px";
+                    if(carryCabbage){
+                        itemMoving(cabbage,doraemon_direction);
+                    }
+                    if(carrySugar){
+                        itemMoving(sugar,doraemon_direction);
+                    }
             }
 
             leftMovingtimer=$timeout(function(){
@@ -1390,10 +1516,12 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
                 charactor.style.left=currentX-15+"px";
 
                 if(carryItem&&charactor===doraemon){
-                    tmp2=cabbage.style.left;
-                    cabbage.style.transition="ease-in 0.3s";
-                    currentX2=parseInt(tmp2.substring(0,tmp2.length-2));
-                    cabbage.style.left=currentX2-15+"px";
+                    if(carryCabbage){
+                        itemMoving(cabbage,doraemon_direction);
+                    }
+                    if(carrySugar){
+                        itemMoving(sugar,doraemon_direction);
+                    }
                 }
                 // console.log("left: "+charactor.style.left);
             },350);
@@ -1426,10 +1554,12 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
             charactor.style.transition="ease-in 0.3s";
             charactor.style.left=currentX+15+"px";
             if(carryItem&&charactor===doraemon){
-                var tmp2=cabbage.style.left;
-                cabbage.style.transition="ease-in 0.3s";
-                var currentX2=parseInt(tmp2.substring(0,tmp2.length-2));
-                cabbage.style.left=currentX2+15+"px";
+                if(carryCabbage){
+                    itemMoving(cabbage,doraemon_direction);
+                }
+                if(carrySugar){
+                    itemMoving(sugar,doraemon_direction);
+                }
             }
 
             rightMovingtimer=$timeout(function(){
@@ -1443,19 +1573,18 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
                 }
                 charactor.style.left=currentX+15+"px";
                 if(carryItem&&charactor===doraemon){
-                    tmp2=cabbage.style.left;
-                    cabbage.style.transition="ease-in 0.3s";
-                    currentX2=parseInt(tmp2.substring(0,tmp2.length-2));
-                    cabbage.style.left=currentX2+15+"px";
+                    if(carryCabbage){
+                        itemMoving(cabbage,doraemon_direction);
+                    }
+                    if(carrySugar){
+                        itemMoving(sugar,doraemon_direction);
+                    }
                 }
                 // console.log("left: "+charactor.style.left);
             },350);
         }
     }
     
-    var buycabbageOn=false;
-    var carryItem=false;
-
     $scope.buycabbage=function(){
         var tmp1=doraemon.style.left;
         var tmp2=doraemon.style.top;
@@ -1467,7 +1596,6 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         if(currentX>680&&currentX<790&&currentY<310){
             gamedialog();
         }
-        console.log($scope.showdialogwindow);
     }
     
     $scope.selectdialog=function(value){
@@ -1503,8 +1631,9 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
 
             if(currentX1>=(currentX2-70)&&currentX1<=(currentX2+70)&&currentY1>=(currentY2-70)&&currentY1<=(currentY2+70)){
                 takeItem(cabbage,currentX1,currentY1);
+                handEmpty=false;
             }
-            if(currentX1>=(currentX3-70)&&currentX1<=(currentX3+70)&&currentY1>=(currentY3-70)&&currentY1<=(currentY3+70)){
+            if(currentX1>=(currentX3-70)&&currentX1<=(currentX3+70)&&currentY1>=(currentY3-70)&&currentY1<=(currentY3+70)&&handEmpty){
                 takeItem(sugar,currentX1,currentY1);
             }
         }     
@@ -1515,61 +1644,110 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
         if(item===cabbage){
             item.style.left=currentX+"px";
             item.style.top=currentY-15+"px";
+            carryCabbage=true;
+        }
+        if(item===sugar){
+            item.style.left=currentX-15+"px";
+            item.style.top=currentY+30+"px";
+            carrySugar=true;
         }
         carryItem=true;
     }
 
-    // function itemMoving(item,direction){
-    //     item.style.transition="ease-in 0.3s";
-    //     var tmpX=item.style.left;
-    //     var tmpY=item.style.top;
-    //     var currentX=parseInt(tmpX.substring(0,tmpY.length-2));       
-    //     var currentY=parseInt(tmpY.substring(0,tmpY.length-2));
+    function itemMoving(item,direction){
+        item.style.transition="ease-in 0.3s";
+        var tmpX=item.style.left;
+        var tmpY=item.style.top;
+        var currentX=parseInt(tmpX.substring(0,tmpY.length-2));       
+        var currentY=parseInt(tmpY.substring(0,tmpY.length-2));
 
-    //     switch(direction){
-    //         case "up":
-    //             item.style.top=currentY-15+"px";
-    //             break;
-    //         case "down":
-    //             item.style.top=currentY+15+"px";
-    //             break;
-    //         case "left":
-    //             item.style.left=currentX-15+"px";
-    //             break;
-    //         case "right":
-    //             item.style.left=currentX+15+"px";
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
+        switch(direction){
+            case "up":
+                item.style.top=currentY-15+"px";
+                break;
+            case "down":
+                item.style.top=currentY+15+"px";
+                break;
+            case "left":
+                item.style.left=currentX-15+"px";
+                break;
+            case "right":
+                item.style.left=currentX+15+"px";
+                break;
+            default:
+                break;
+        }
+    }
+    
+    var summonbird=true;
 
-    $scope.putcabbage=function(){
-        if(carryItem){
-            var tmp1=doraemon.style.left;
-            var tmp2=doraemon.style.top;
-            var currentX1=parseInt(tmp1.substring(0,tmp1.length-2));
-            var currentY1=parseInt(tmp2.substring(0,tmp2.length-2));
+    $scope.Bbutton=function(){
+        var tmp1=doraemon.style.left;
+        var tmp2=doraemon.style.top;
+        var currentX1=parseInt(tmp1.substring(0,tmp1.length-2));
+        var currentY1=parseInt(tmp2.substring(0,tmp2.length-2));
 
-            var tmp3=cabbage.style.left;
-            var tmp4=cabbage.style.top;
-            var currentX2=parseInt(tmp3.substring(0,tmp3.length-2));
-            var currentY2=parseInt(tmp4.substring(0,tmp4.length-2));
+        var tmp3=cabbage.style.left;
+        var tmp4=cabbage.style.top;
+        var currentX2=parseInt(tmp3.substring(0,tmp3.length-2));
+        var currentY2=parseInt(tmp4.substring(0,tmp4.length-2));
+        
+        var tmp5=sugar.style.left;
+        var tmp6=sugar.style.top;
+        var currentX3=parseInt(tmp5.substring(0,tmp5.length-2));
+        var currentY3=parseInt(tmp6.substring(0,tmp6.length-2));
 
-            if(doraemon_direction=="right"){
-                cabbage.style.left=currentX1+30+"px";
-                cabbage.style.top=currentY1+50+"px";
-            }else if(doraemon_direction=="left"){
-                cabbage.style.left=currentX1-30+"px";
-                cabbage.style.top=currentY1+50+"px";
-            }else if(doraemon_direction=="down"){
-                cabbage.style.left=currentX1-5+"px";
-                cabbage.style.top=currentY1+60+"px";
-            }else if(doraemon_direction=="up"){
-                cabbage.style.left=currentX1-30+"px";
-                cabbage.style.top=currentY1+50+"px";
+        if(carryItem){            
+            if(carryCabbage){
+                putoffItem(cabbage,currentX1,currentY1);
+            }
+            if(carrySugar){
+                putoffItem(sugar,currentX1,currentY1);
             }
             carryItem=false;
+            carryCabbage=false;
+            carrySugar=false;
+            handEmpty=true;
+        }else if(!carryItem&&summonbird){
+            summonbird=false;
+            $scope.showeagle=true;
+            eagle.style.transition="ease-out 7s";
+            $timeout(function(){
+               eagle.style.left=tmp1;
+               eagle.style.top=currentY1-30+"px";
+            },200);
+
+            $timeout(function(){
+               eagle.style.transition="ease-in 5s";
+            },7400)
+
+            $timeout(function(){
+                eagle.style.left="1250px";
+                eagle.style.top="0px";
+            },7600);
+
+            $timeout(function(){
+                $scope.showeagle=false;
+                eagle.style.transition="0s";
+                eagle.style.left="0px";
+                summonbird=true;
+            },12800);
+        }
+    }
+
+    function putoffItem(item,currentX,currentY){
+        if(doraemon_direction=="right"){
+            item.style.left=currentX+30+"px";
+            item.style.top=currentY+50+"px";             
+        }else if(doraemon_direction=="left"){
+            item.style.left=currentX-30+"px";
+            item.style.top=currentY+50+"px"; 
+        }else if(doraemon_direction=="down"){
+            item.style.left=currentX-5+"px";
+            item.style.top=currentY+60+"px";
+        }else if(doraemon_direction=="up"){
+            item.style.left=currentX-30+"px";
+            item.style.top=currentY+50+"px";
         }
     }
 
@@ -1594,21 +1772,29 @@ app.controller('producerCtrl',function($scope,$timeout,$interval){
             if(currentY1>currentY3){
                 charactor.style.zIndex=16;
                 cabbage.style.zIndex=16;
+                sugar.style.zIndex=16;
             }else{
                 charactor.style.zIndex=10;
                 cabbage.style.zIndex=10;
+                sugar.style.zIndex=10;
             }
         }else{
             if(currentY1>currentY3){
                 charactor.style.zIndex=16;
                 cabbage.style.zIndex=10;
+                sugar.style.zIndex=10;
+                console.log(charactor.style.zIndex+" "+cabbage.style.zIndex);
             }else{
                 if(currentY1-60>currentY2){
                     charactor.style.zIndex=12;
                     cabbage.style.zIndex=10;
+                    sugar.style.zIndex=10;
+                    console.log(charactor.style.zIndex+" "+cabbage.style.zIndex);
                 }else{
                     charactor.style.zIndex=10;
                     cabbage.style.zIndex=12;
+                    sugar.style.zIndex=12;
+                    console.log(charactor.style.zIndex+" "+cabbage.style.zIndex);
                 }
             }
         }

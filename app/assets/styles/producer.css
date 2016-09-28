@@ -413,12 +413,21 @@
    	position:absolute;
 	left:550px;
 	bottom:30px;
+	z-index:20;
+}
+
+#switchtimebtn{
+    position:absolute;
+	left:700px;
+	bottom:30px;
+	z-index:20;
 }
 
 #quitdoraemongamebtn{
 	position:absolute;
-	left:700px;
+	left:850px;
 	bottom:30px;
+	z-index:20;
 }
 
 #doraemon{
@@ -486,6 +495,7 @@
 	height:125px;
 	left:742px;
 	top:200px;
+	z-index:19;
 }
 
 #sodarseller:hover{
@@ -533,7 +543,34 @@
 	width:32px;
 	height:33px;
 	left:650px;
-	top:260px;
+	top:280px;
+}
+
+#bluebutterfly{
+	position:absolute;
+	width:105px;
+	height:84px;
+	left:1200px;
+	top:230px;
+	z-index:17;
+}
+
+#greenbuterfly{
+	position:absolute;
+	width:105px;
+	height:84px;
+	left:50px;
+	top:350px;
+	z-index:17;
+}
+
+#eagle{
+	position:absolute;
+	width:70px;
+	height:56px;
+	left:0px;
+	top:0px;
+	z-index:17;
 }
 
 #up_panel{
@@ -542,6 +579,7 @@
 	height:57px;
 	left:1000px;
 	bottom:150px;
+	z-index:20;
 }
 
 #up_panel:hover{
@@ -554,6 +592,7 @@
 	height:57px;
 	left:1000px;
 	bottom:85px;
+	z-index:20;
 }
 
 #down_panel:hover{
@@ -566,6 +605,7 @@
 	height:57px;
 	left:930px;
 	bottom:85px;
+	z-index:20;
 }
 
 #left_panel:hover{
@@ -578,6 +618,7 @@
 	height:57px;
 	left:1070px;
 	bottom:85px;
+	z-index:20;
 }
 
 #right_panel:hover{
@@ -590,6 +631,7 @@
 	height:57px;
 	left:1200px;
 	bottom:85px;
+	z-index:20;
 }
 
 #A_panel:hover{
@@ -602,8 +644,36 @@
 	height:57px;
 	left:1270px;
 	bottom:85px;
+	z-index:20;
 }
 
 #B_panel:hover{
     cursor:pointer;
+}
+
+#afternoon_layer{
+	position:absolute;
+	width:1400px;
+	height:800px;
+	left:0px;
+	top:0px;
+	z-index:18;
+}
+
+#switchtime_layer{
+	position:absolute;
+	width:1400px;
+	height:800px;
+	left:0px;
+	top:0px;
+	z-index:18;
+}
+
+#night_layer{
+	position:absolute;
+	width:1400px;
+	height:800px;
+	left:0px;
+	top:0px;
+	z-index:18;
 }
