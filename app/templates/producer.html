@@ -136,4 +136,17 @@
             <button id="switchtimebtn" class="btn btn-warning" ng-click="switchgametime()">Switch Time</button>
             <button id="quitdoraemongamebtn" class="btn btn-success" ng-click="switchdoraemongame(true)">Quit Game</button>
         </div>
+
+        <div id="doraemonbombgame_gif" ng-show="doraemonbombgameswitch1"><img src="assets/images/src/producer/doraemonbomb_game.gif" ng-click="switchdoraemonbombgame(false)"/> 
+        </div>
+        <div id="doraemongamebomb_board" ng-show="doraemonbombgameswitch2" style="background:url(assets/images/src/producer/doraemonbomb/background.jpg) no-repeat center">
+            <div id="doraemonbomb" style="background:url(assets/images/src/producer/doraemonbomb/down1.png) no-repeat center" value="doraemon"></div>
+            <div id="nobitabomb" style="background:url(assets/images/src/producer/doraemonbomb/nobita_down1.png) no-repeat center" value="nobita"></div>
+            <div id="box1" style="background:url(assets/images/src/producer/doraemonbomb/box.png) no-repeat center"></div>
+            <div id="bat1" style="background:url(assets/images/src/producer/doraemonbomb/bat_down1.png) no-repeat center"></div>
+            <div id="bat2" style="background:url(assets/images/src/producer/doraemonbomb/bat_down1.png) no-repeat center"></div>
+            <div id="bat3" style="background:url(assets/images/src/producer/doraemonbomb/bat_down1.png) no-repeat center"></div>
+            <button id="doraemonbombgamestartbtn" class="btn btn-info" ng-click="doraemonbombgamestart()">Start Game</button>
+            <button id="quitdoraemonbombgamebtn" class="btn btn-success" ng-click="switchdoraemonbombgame(true)">Quit Game</button>
+        </div>
 </div>
